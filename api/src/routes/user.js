@@ -2,9 +2,8 @@ const express = require("express");
 const userModel = require("../modules/models/user.model");
 const authGuard = require("../middlewares/authGuard");
 const wrapAsyncController = require("../modules/wrapAsyncController");
+const { setLocationRecord, getLocationRecord } = require("../utils/location");
 const router = express.Router();
-
-const locationRecord = {};
 
 /**
  * @swagger
@@ -141,7 +140,7 @@ router.get(
   "/location/byMe",
   authGuard,
   wrapAsyncController(async (req, res) => {
-    const location = locationRecord[req.user._id.toString()];
+    const location = getLocationRecord(req.user._id.toString());
     if (!location) {
       res.status(404).send("Not Found");
       return;
@@ -190,10 +189,10 @@ router.put(
       res.status(400).send("Bad Request");
       return;
     }
-    locationRecord[req.user._id.toString()] = {
+    setLocationRecord(req.user._id.toString(), {
       latitude: req.body.latitude,
       longitude: req.body.longitude,
-    };
+    });
     res.send(req.user._id);
   })
 );
