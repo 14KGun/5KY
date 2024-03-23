@@ -88,7 +88,7 @@ const Login = () => {
       </IdContainer>
       <IdContainer>
         <Label>비밀번호</Label>
-        <Input type="text" placeholder="비밀번호를 입력해주세요"></Input>
+        <Input type="password" placeholder="비밀번호를 입력해주세요"></Input>
       </IdContainer>
       <LoginBtn>로그인</LoginBtn>
       <ToSignUp>
