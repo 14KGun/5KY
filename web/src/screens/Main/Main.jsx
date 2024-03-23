@@ -1,20 +1,18 @@
 import React, { useEffect } from 'react';
-// import Alarm from "../../components/Alarm";
 import Profile from "../../components/Profile";
 import { useNavigate } from 'react-router-dom';
 import useSWR from 'swr';
+// import Alarm from "../../components/Alarm";
 import { useCookies } from 'react-cookie';
 
 const Main = () => {
   let navigate = useNavigate();
   const [cookies] = useCookies(['userId']);
-
   const id = cookies.userId;
 
   const { data, error, isLoading } = useSWR(
     id ? `/user/byMe?userId=${id}` : null
   );
-
   useEffect(() => {
     // 여기에서 로그인 여부를 판단합니다.
     // 예를 들어, 'userId' 쿠키가 없다면 로그인 페이지로 리디렉션
@@ -23,7 +21,6 @@ const Main = () => {
     }
     // 로그인이 되어 있으면, 추가적인 로직을 실행
   }, [cookies.userId, navigate]);
-
   // 데이터 로딩 중이거나 에러가 발생한 경우의 처리
   if (isLoading) return <div>Loading...</div>;
   if (error) return <div>Error loading data</div>;
