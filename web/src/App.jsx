@@ -2,8 +2,9 @@ import { SWRConfig } from "swr";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import instance from "@/utils/instance";
 import TabApp from "./TabApp/TabApp";
-import Login from "./screens/Login/Login";
-import SignUp from "./screens/SignUp/SignUp";
+import Login from "./screens/Login/Login"
+import SignUp from "./screens/SignUp/SignUp"
+import FindSetting from "./screens/FindSetting";
 import TagSetting from "./screens/TagSetting/TagSetting";
 
 const SWRValue = {
@@ -16,9 +17,10 @@ const App = () => {
     <SWRConfig value={SWRValue}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<TabApp />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<SignUp />} />
+          <Route path="/" element={<TabApp/>}/>
+          <Route path="/login" element={<Login/>}/>
+          <Route path="/signup" element={<SignUp/>}/>         
+          <Route path="/findsetting" element={<FindSetting/>}/>
           <Route path="/tagsetting" element={<TagSetting />} />
         </Routes>
       </BrowserRouter>
