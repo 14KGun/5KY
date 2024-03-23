@@ -1,4 +1,5 @@
 const express = require("express");
+const authGuard = require("../middlewares/authGuard");
 const wrapAsyncController = require("../modules/wrapAsyncController");
 const userModel = require("../modules/models/user.model");
 const router = express.Router();
@@ -69,6 +70,7 @@ router.post(
  */
 router.delete(
   "/",
+  authGuard,
   wrapAsyncController(async (req, res) => {
     await req.session.destroy();
     res.send("Success");

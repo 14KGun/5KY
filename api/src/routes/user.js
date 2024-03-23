@@ -81,7 +81,7 @@ router.post(
  * @swagger
  *  /user/location/byMe:
  *    put:
- *      summary: 내 유저 정보 업데이트 (위치 정보 수정 등)
+ *      summary: 내 위치 정보 업데이트
  *      tags: [user]
  *      produces:
  *      - application/json

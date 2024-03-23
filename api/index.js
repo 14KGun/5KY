@@ -14,7 +14,7 @@ app.use(
     saveUninitialized: true,
   })
 );
-
+app.use(require("./src/middlewares/auth"));
 app.use("/api-docs", require("./src/routes/apidocs"));
 app.use("/auth", require("./src/routes/auth"));
 app.use("/chat", require("./src/routes/chat"));
