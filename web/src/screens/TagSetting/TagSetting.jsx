@@ -117,6 +117,16 @@ const NextBtn = styled.div`
 const TagSetting = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const navigate = useNavigate();
+  const [nickname, setNickname] = useState(""); // 닉네임 상태 초기화
+  // 기존 상태 및 핸들러 정의 코드는 생략됨
+
+  useEffect(() => {
+    // Localstorage에서 signupData 가져오기
+    const signupData = JSON.parse(localStorage.getItem("signupData"));
+    if (signupData && signupData.name) {
+      setNickname(signupData.name); // signupData에서 name을 가져와 닉네임 상태 업데이트
+    }
+  }, []);
 
   useEffect(() => {
     // Localstorage에서 signupData 가져오기
@@ -140,7 +150,7 @@ const TagSetting = () => {
     <RealContainer>
       <Container>
         <Title>
-          <Name>박정민</Name>님 안녕하세요!
+          <Name>{nickname}</Name>님 안녕하세요!
         </Title>
         <Info>당신에 대해 알려주세요.</Info>
         <Info>

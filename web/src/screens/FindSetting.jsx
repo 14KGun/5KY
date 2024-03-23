@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import instance from "../utils/instance";
 
 // Styled components
 const Container = styled.div`
@@ -151,9 +152,41 @@ const FindSetting = () => {
     setToggleFriend(!toggleFriend);
   };
 
-  const handleConfirm = () => {
-    navigate("/");
+  const registerUser = async (signupData) => {
+    try {
+      // instance를 사용하여 /user 엔드포인트에 POST 요청
+      const response = await instance.post("/user", signupData);
+      console.log("회원가입 성공:", response.data);
+      localStorage.removeItem("signupData");
+      navigate("/login");
+    } catch (error) {
+      console.error("회원가입 실패:", error.response ? error.response.data : error);
+      // 에러 처리 로직, 예를 들어 에러 메시지 표시
+    }
   };
+  
+  const handleConfirm = () => {
+    const signupData = JSON.parse(localStorage.getItem("signupData")) || {};
+
+    // friend와 lover 설정 추가, 연령 값들을 숫자로 변환
+    signupData.friend = {
+      minAge: minAgeFriend ? parseInt(minAgeFriend, 10) : 0,
+      maxAge: maxAgeFriend ? parseInt(maxAgeFriend, 10) : 200,
+      gender: genderFriend
+    };
+
+    signupData.lover = {
+      minAge: minAge ? parseInt(minAge, 10) : 0,
+      maxAge: maxAge ? parseInt(maxAge, 10) : 200,
+      gender: gender
+    };
+  
+    // 변경된 signupData를 Localstorage에 저장
+    localStorage.setItem("signupData", JSON.stringify(signupData));
+    
+    registerUser(signupData);
+  };
+    
 
   const [nickname, setNickname] = useState(""); // 닉네임 상태 초기화
   // 기존 상태 및 핸들러 정의 코드는 생략됨

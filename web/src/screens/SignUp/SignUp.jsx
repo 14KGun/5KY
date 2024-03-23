@@ -84,9 +84,12 @@ const SignUp = () => {
 
   const onClickSignUp = useCallback(() => {
     // 입력값 검증 로직 (예: 비밀번호 확인 일치 여부) 추가 가능
-
+    if (pw !== pwCheck) {
+      alert("비밀번호가 일치하지 않습니다.");
+      return; // Stop the sign-up process
+    }
     // Local Storage에 입력값 저장
-    localStorage.setItem('signupData', JSON.stringify({ id, pw, pwCheck, name, age, gender }));
+    localStorage.setItem('signupData', JSON.stringify({ id, password:pw, name, age, gender }));
 
     // /tagsetting 페이지로 이동
     navigate("/tagsetting");
