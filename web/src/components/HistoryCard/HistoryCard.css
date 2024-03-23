@@ -18,12 +18,12 @@
   .nickname {
     flex-grow: 1;
     margin-left: 10px; /* 하트 아이콘과의 간격 */
-    font-size: 18px; /* 크기는 조절 가능 */
+    font-size: 24px; /* 크기는 조절 가능 */
     color: #333;
   }
   
   .met-count {
-    font-size: 16px; /* 크기는 조절 가능 */
+    font-size: 24px; /* 크기는 조절 가능 */
     color: #666;
     display: flex;
     align-items: center;

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import HistoryCard from "../../components/HistoryCard/HistoryCard";
+import styled from "styled-components";
+import "./History.css"; // CSS 파일 임포트
 
 // 각 항목에 고유한 id 속성을 추가합니다.
 const initialHistoryData = [
@@ -47,15 +49,32 @@ const initialHistoryData = [
   },
 ];
 
+const Container = styled.div`
+  width: 100vw;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #FFFFFF;
+`;
+
+const SectionTitle = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 20px 0;
+`;
+
 const History = () => {
   const [historyData, setHistoryData] = useState(initialHistoryData);
 
   // 북마크된 항목만 필터링합니다.
   const bookmarks = historyData.filter((item) => item.isHeartFilled);
   const today = new Date().toISOString().split("T")[0];
-  const todaysCoincidences = historyData.filter(
-    (item) => item.date === today
-  );
+  const todaysCoincidences = historyData.filter((item) => item.date === today);
   // toggleHeart 함수는 id를 받아 해당하는 항목의 isHeartFilled 상태를 토글합니다.
   const toggleHeart = (id) => {
     const updatedHistory = historyData.map((item) =>
@@ -65,26 +84,21 @@ const History = () => {
   };
 
   return (
-    <div className="container">
-      <div className="app-container">
-        {/* 북마크 섹션에도 onHeartClick prop을 전달합니다. */}
-        {bookmarks.map((data) => (
-          <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
-        ))}
+    <Container>
+      {bookmarks.map((data) => (
+        <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
+      ))}
 
-        {/* '오늘의 우연' 섹션 */}
-        <div className="section-title">오늘의 우연</div>
-        {todaysCoincidences.map((data) => (
-          <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
-        ))}
+      <SectionTitle>오늘의 우연</SectionTitle>
+      {todaysCoincidences.map((data) => (
+        <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
+      ))}
 
-        {/* '그 모든 우연' 섹션 */}
-        <div className="section-title">그 모든 우연</div>
-        {historyData.map((data) => (
-          <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
-        ))}
-      </div>
-    </div>
+      <SectionTitle>그 모든 우연</SectionTitle>
+      {historyData.map((data) => (
+        <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
+      ))}
+    </Container>
   );
 };
 
