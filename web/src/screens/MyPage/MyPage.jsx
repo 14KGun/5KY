@@ -240,11 +240,12 @@ const MyPage = () => {
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
+                            justifyContent: "space-between", // 버튼 사이에 공간을 균등하게 분배
                           }}
                         >
                           <Box
                             sx={{
-                              width: "36px",
+                              width: "50px",
                               height: "25px",
                               bgcolor: "#FF8E5E",
                               border: "0px solid transparent",
@@ -257,7 +258,7 @@ const MyPage = () => {
                           </Box>
                           <Box
                             sx={{
-                              width: "36px",
+                              width: "50px",
                               height: "25px",
                               bgcolor: "#FF8E5E",
                               border: "0px solid transparent",
@@ -270,7 +271,7 @@ const MyPage = () => {
                           </Box>
                           <Box
                             sx={{
-                              width: "36px",
+                              width: "50px",
                               height: "25px",
                               bgcolor: "#FF8E5E",
                               border: "0px solid transparent",
@@ -368,11 +369,12 @@ const MyPage = () => {
                             display: "flex",
                             flexDirection: "row",
                             alignItems: "center",
+                            justifyContent: "space-between", // 버튼 사이에 공간을 균등하게 분배
                           }}
                         >
                           <Box
                             sx={{
-                              width: "36px",
+                              width: "50px",
                               height: "25px",
                               bgcolor: "#FF8E5E",
                               border: "0px solid transparent",
@@ -385,7 +387,7 @@ const MyPage = () => {
                           </Box>
                           <Box
                             sx={{
-                              width: "36px",
+                              width: "50px",
                               height: "25px",
                               bgcolor: "#FF8E5E",
                               border: "0px solid transparent",
@@ -398,7 +400,7 @@ const MyPage = () => {
                           </Box>
                           <Box
                             sx={{
-                              width: "36px",
+                              width: "50px",
                               height: "25px",
                               bgcolor: "#FF8E5E",
                               border: "0px solid transparent",

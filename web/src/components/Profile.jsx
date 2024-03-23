@@ -129,7 +129,7 @@ const Profile = ({ name, tags }) => {
           </Tags>
         </TagContainer>
       </TagContainers>
-      <HistoryCard></HistoryCard>
+      {/* <HistoryCard></HistoryCard> */}
     </Container>
   );
 };
