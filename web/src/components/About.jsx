@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { Typography, Box, Button } from "@mui/material";
 
 const ProfileContainer = styled.div`
   background: #ffffff;
@@ -8,7 +9,7 @@ const ProfileContainer = styled.div`
   padding: 20px;
   max-width: 350px; // Adjust width as needed
   font-family: "Roboto", sans-serif;
-  margin: auto;
+  margin: 50px auto;
 `;
 
 const Header = styled.div`
@@ -34,7 +35,6 @@ const Description = styled.p`
 
 const Info = styled.div`
   display: flex;
-  justify-content: space-between;
   font-size: 1rem;
   margin-bottom: 1rem;
   & > span {
@@ -69,25 +69,122 @@ const ActionButton = styled.button`
   }
 `;
 
-const About = ({setOpenProfile}) => {
+const About = ({ setOpenProfile, nickname }) => {
   return (
     <ProfileContainer>
-      <Header>
-        <Title>박정민</Title>
-        <Description>님이 12분 전에 우연을 울렸어요!</Description>
-      </Header>
-      <Info>
-        <span>성별</span> 여성
-        <span>연령</span> 23세
-      </Info>
-      <Tags>#맛집탐방 #음악</Tags>
-      <Tags>#맛집탐방 #애니메이션 #음악</Tags>
-      <ActionsContainer>
-        <ActionButton onClick={() => setOpenProfile(false)}>
-          채팅하기
-        </ActionButton>
-        <ActionButton onClick={() => setOpenProfile(false)}>닫기</ActionButton>
-      </ActionsContainer>
+      <Box
+        sx={{
+          width: "100%",
+          marginLeft: "1rem",
+          display: "flex",
+          alignItems: "start",
+          flexDirection: "column",
+          justifyContent: "start",
+          flexWrap: "wrap",
+        }}
+      >
+        <Header>
+          <Box
+            sx={{
+              width: "100%",
+              marginTop: "1rem",
+              display: "flex",
+              alignItems: "start",
+              flexDirection: "column",
+              justifyContent: "start",
+              flexWrap: "wrap",
+              marginBottom: "2rem",
+            }}
+          >
+            <Box
+              sx={{
+                width: "100%",
+                display: "flex",
+                alignItems: "center",
+                flexDirection: "row",
+                justifyContent: "start",
+                flexWrap: "wrap",
+              }}
+            >
+              <Typography
+                fontFamily={"Pretendard-Black"}
+                fontSize={"24px"}
+                color="primary"
+              >
+                {nickname}
+              </Typography>
+              <Typography>
+                님이
+                <br />
+              </Typography>
+            </Box>
+            <Typography>12분 전에 우연을 울렸어요!</Typography>
+          </Box>
+        </Header>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+          }}
+        >
+          <Box sx={{ marginRight: "60px" }}>
+            <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
+              성별
+            </Typography>
+            <Typography>여성</Typography>
+          </Box>
+          <Box>
+            <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
+              나이
+            </Typography>
+            <Typography>23세</Typography>
+          </Box>
+        </Box>
+        <Box>
+          <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
+            공통 관심사
+          </Typography>
+          <Typography fontFamily={"Pretendard-Reular"}>
+            #맛집탐방 #음악
+          </Typography>
+        </Box>
+
+        <Box>
+          <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
+            관심사
+          </Typography>
+          <Typography fontFamily={"Pretendard-Reular"}>
+            #맛집탐방 #음악 #유튜브 보기
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            width: "100%",
+            marginTop: "1rem",
+          }}
+        >
+          <Button
+            type="text"
+            onClick={() => setOpenProfile(false)}
+            sx={{
+              color: "grey",
+              margin: "0rem 8rem 0rem 0rem",
+            }}
+          >
+            채팅하기
+          </Button>
+          <Button
+            type="text"
+            onClick={() => setOpenProfile(false)}
+            sx={{
+              color: "grey",
+            }}
+          >
+            닫기
+          </Button>
+        </Box>
+      </Box>
     </ProfileContainer>
   );
 };
