@@ -5,7 +5,7 @@ import Main from '../screens/Main/Main';
 import MyPage from '../screens/MyPage/MyPage';
 
 const TabApp = () => {
-  const [activeTab, setActiveTab] = useState('tab1');
+  const [activeTab, setActiveTab] = useState('tab2');
 
   const handleTabClick = (tab) => {
     setActiveTab(tab);
