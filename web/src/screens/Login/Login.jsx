@@ -14,7 +14,7 @@ const Container = styled.div`
 const Title = styled.div`
   font-size: 50px;
   font-weight: Bold;
-  color: #ec407a;
+  color: #F36427;
   margin-bottom: 71px;
 `;
 
@@ -39,7 +39,7 @@ const Input = styled.input`
   padding: 0 15px;
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 2px #ec407a;
+    box-shadow: 0px 0px 2px #F36427;
   }
 `;
 
@@ -50,7 +50,7 @@ const LoginBtn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ec407a;
+  background-color: #F36427;
   color: white;
   font-size: 16px;
   font-weight: 750;
@@ -72,7 +72,7 @@ const Info = styled.div`
 `;
 
 const SignupBtn = styled.div`
-  color: #ec407a;
+  color: #F36427;
   font-weight: 700;
   margin-left: 5px;
   &:hover {
