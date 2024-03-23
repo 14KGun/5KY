@@ -1,7 +1,4 @@
 import { useState } from 'react';
-import styled from 'styled-components';
-
-import TabFooter from '../components/TabFooter/TabFooter';
 import History from '../screens/History';
 import Main from '../screens/Main/Main';
 import MyPage from '../screens/MyPage/MyPage';
@@ -36,7 +33,6 @@ const TabApp = () => {
       <div className="tab-content">
         {renderTabContent()}
       </div>
-      <TabFooter onTabChange={handleTabClick} />
     </div>
   );
 };
