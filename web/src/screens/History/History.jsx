@@ -79,6 +79,7 @@ const History = () => {
   const bookmarks = historyData.filter((item) => item.isHeartFilled);
   const today = new Date().toISOString().split("T")[0];
   const todaysCoincidences = historyData.filter((item) => item.date === today);
+
   // toggleHeart 함수는 id를 받아 해당하는 항목의 isHeartFilled 상태를 토글합니다.
   const toggleHeart = (id) => {
     const updatedHistory = historyData.map((item) =>
@@ -86,6 +87,8 @@ const History = () => {
     );
     setHistoryData(updatedHistory);
   };
+
+  const allCoincidences = historyData.filter((item) => !item.isHeartFilled);
 
   return (
     <Container>
@@ -99,7 +102,7 @@ const History = () => {
       ))}
 
       <SectionTitle>그 모든 우연</SectionTitle>
-      {historyData.map((data) => (
+      {allCoincidences.map((data) => (
         <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
       ))}
     </Container>
