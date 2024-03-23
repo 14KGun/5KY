@@ -73,6 +73,7 @@ const Info = styled.div`
 const SignupBtn = styled.div`
   color: #ec407a;
   font-weight: 700;
+  margin-left: 5px;
   &:hover {
     cursor: pointer;
   }
