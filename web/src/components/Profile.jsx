@@ -105,7 +105,7 @@ const Tag = styled.div`
   justify-content: center;
 `;
 
-const Profile = ({ name }) => {
+const Profile = ({ name, tags }) => {
   return (
     <Container>
       <Headers>
@@ -123,19 +123,10 @@ const Profile = ({ name }) => {
       </Headers>
       <TagContainers>
         <TagContainer>
-          취미
           <Tags>
-
-            <Tag>#영화</Tag>
-            <Tag>#애니</Tag>
-          </Tags>
-        </TagContainer>
-        <TagContainer>
-          취미
-          <Tags>
-
-            <Tag>#유튜브</Tag>
-            <Tag>#애니</Tag>
+            {tags.map((tag, index) => (
+              <Tag key={index}>#{tag}</Tag>
+            ))}
           </Tags>
         </TagContainer>
       </TagContainers>
