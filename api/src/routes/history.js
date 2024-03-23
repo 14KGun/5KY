@@ -155,4 +155,62 @@ router.get(
   })
 );
 
+/**
+ * @swagger
+ *  /history/byId/{id}:
+ *    patch:
+ *      summary: 히스토리 정보 업데이트 (북마크 등)
+ *      tags: [history]
+ *      parameters:
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: string
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                isBookmarked:
+ *                  type: boolean
+ *      responses:
+ *        200:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                description: 히스토리 아이디
+ *                example: "히스토리 아이디"
+ */
+router.patch(
+  "/byId/:id",
+  authGuard,
+  wrapAsyncController(async (req, res) => {
+    const updateOption = {};
+    if (typeof req.body.isBookmarked === "boolean") {
+      updateOption.isBookmarked = req.body.isBookmarked;
+    }
+
+    const history = await historyModel
+      .findOneAndUpdate(
+        {
+          $and: [
+            { userIds: { $elemMatch: { $eq: req.user._id } } },
+            { _id: req.params.id },
+          ],
+        },
+        updateOption,
+        { new: true }
+      )
+      .populate("userIds");
+    if (!history) {
+      return res.status(404).json({ message: "Not found" });
+    }
+    res.send(history._id);
+  })
+);
+
 module.exports = router;
