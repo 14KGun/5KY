@@ -56,8 +56,9 @@ const Container = styled.div`
   align-items: center;
   justify-content: center;
   padding: 20px 15px; /* top and bottom padding 20px, left and right padding 15px */
-  background: #f7f7f7; /* 배경 색 */
+  background: #ffffff; /* 배경 색 */
   margin: 0 auto; /* 중앙 정렬 */
+  padding-bottom: 50px;
 `;
 
 const SectionTitle = styled.div`
@@ -66,11 +67,10 @@ const SectionTitle = styled.div`
   justify-content: flex-start; /* Align text to the left */
   width: 100%; /* Fill the width */
   font-size: 24px;
-  font-weight: 600;
+  font-weight: 700;
   color: #333;
-  margin: 20px 0;
+  margin: 20px 0 20px 25px;
 `;
-
 
 const History = () => {
   const [historyData, setHistoryData] = useState(initialHistoryData);

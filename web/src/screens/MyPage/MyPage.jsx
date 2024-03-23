@@ -1,8 +1,15 @@
+import React from "react";
+import { Button } from "@mui/material";
+import CustomButton from "../../components/PrimaryButton";
+
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
+
+import { useNavigate } from "react-router-dom";
+
 const MyPage = () => {
-    return (
-      <div>
-        <h1>마이페이지</h1>
-      </div>
-    );};
-  
-  export default MyPage;
+  return (<></>
+  );
+};
+
+export default MyPage;
