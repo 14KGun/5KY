@@ -5,7 +5,11 @@ const wishSchema = Schema(
   {
     minAge: { type: Number, required: true },
     maxAge: { type: Number, required: true },
-    gender: { type: String, required: true, enum: ["male", "female"] },
+    gender: {
+      type: String,
+      required: true,
+      enum: ["male", "female", "unknown"],
+    },
   },
   { timestamps: true }
 );
@@ -17,7 +21,11 @@ const userSchema = Schema(
     name: { type: String, required: true },
     tags: { type: [String], required: true, default: [] },
     age: { type: Number, required: true },
-    gender: { type: String, required: true, enum: ["male", "female"] },
+    gender: {
+      type: String,
+      required: true,
+      enum: ["male", "female", "unknown"],
+    },
     friend: { type: wishSchema, required: false },
     lover: { type: wishSchema, required: false },
   },

@@ -34,7 +34,7 @@ const router = express.Router();
  *                    type: number
  *                  gender:
  *                    type: string
- *                    enum: [male, female]
+ *                    enum: [male, female, unknown]
  *                  friend:
  *                    type: object
  *                    required: [minAge, maxAge, gender]
@@ -45,7 +45,7 @@ const router = express.Router();
  *                        type: number
  *                      gender:
  *                        type: string
- *                        enum: [male, female]
+ *                        enum: [male, female, unknown]
  *                  lover:
  *                    type: object
  *                    required: [minAge, maxAge, gender]
@@ -56,7 +56,7 @@ const router = express.Router();
  *                        type: number
  *                      gender:
  *                        type: string
- *                        enum: [male, female]
+ *                        enum: [male, female, unknown]
  */
 router.get(
   "/byMe",
@@ -104,7 +104,7 @@ router.get(
  *                  type: number
  *                gender:
  *                  type: string
- *                  enum: [male, female]
+ *                  enum: [male, female, unknown]
  *                id:
  *                  type: string
  *                password:
@@ -119,7 +119,7 @@ router.get(
  *                      type: number
  *                    gender:
  *                      type: string
- *                      enum: [male, female]
+ *                      enum: [male, female, unknown]
  *                lover:
  *                  type: object
  *                  required: [minAge, maxAge, gender]
@@ -130,7 +130,7 @@ router.get(
  *                      type: number
  *                    gender:
  *                      type: string
- *                      enum: [male, female]
+ *                      enum: [male, female, unknown]
  *      responses:
  *        200:
  *          content:
