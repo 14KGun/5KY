@@ -104,13 +104,13 @@ const Tag = styled.div`
   justify-content: center;
 `;
 
-const Profile = () => {
+const Profile = ({ name }) => {
   return (
     <Container>
       <Headers>
         <Header>
           <Names>
-            <Name>박정민</Name>님
+            <Name>{name}</Name>님
           </Names>
           <Setting></Setting>
         </Header>
