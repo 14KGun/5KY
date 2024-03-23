@@ -10,6 +10,7 @@ import TagSetting from "./screens/TagSetting/TagSetting";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import TabFooter from "./components/TabFooter/TabFooter";
 import History from "./screens/History";
+import Chat from "./screens/Chat/Chat";
 
 const theme = createTheme({
   typography: {
@@ -46,6 +47,7 @@ const App = () => {
             <Route path="/signup" element={<SignUp />} />
             <Route path="/findsetting" element={<FindSetting />} />
             <Route path="/tagsetting" element={<TagSetting />} />
+            <Route path="/chat" element={<Chat />} />
           </Routes>
           <div
             style={{

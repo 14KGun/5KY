@@ -57,8 +57,11 @@ const IOSSwitch = styled((props) => (
   },
 }));
 
-export default function CustomizedSwitches() {
+export default function CustomizedSwitches({ checked, onChange }) {
   return (
-    <FormControlLabel control={<IOSSwitch sx={{ m: 1 }} defaultChecked />} />
+    <FormControlLabel
+      control={<IOSSwitch sx={{ m: 1 }} checked={checked} onChange={onChange} />}
+      label="" // 필요에 따라 레이블을 추가하거나 비워 둘 수 있습니다.
+    />
   );
 }
