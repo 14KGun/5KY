@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import HistoryCard from "../../components/HistoryCard/HistoryCard";
 import styled from "styled-components";
-import "./History.css"; // CSS 파일 임포트
 
 // 각 항목에 고유한 id 속성을 추가합니다.
 const initialHistoryData = [
@@ -56,7 +55,9 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #FFFFFF;
+  padding: 20px;
+  background: #f7f7f7; /* 배경 색 */
+  margin: 0 auto; /* 중앙 정렬 */
 `;
 
 const SectionTitle = styled.div`
