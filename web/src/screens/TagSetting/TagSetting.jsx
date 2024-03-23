@@ -117,11 +117,33 @@ const NextBtn = styled.div`
 const initialTags = [
   {
     category: "취미",
-    tags: ["영화", "책", "음악", "여행", "요리"],
+    tags: ["영화", "책", "애니", "유튜브", "공부", "방탈출", "여행", "게임"],
   },
   {
-    category: "성격",
-    tags: ["내향적", "외향적", "창의적", "논리적", "감성적"],
+    category: "음식",
+    tags: [
+      "피자",
+      "마라탕",
+      "라멘",
+      "파스타",
+      "치킨",
+      "떡볶이",
+      "초밥",
+      "삼계탕",
+    ],
+  },
+  {
+    category: "음료",
+    tags: [
+      "커피",
+      "칵테일",
+      "탄산",
+      "위스키",
+      "주스",
+      "에이드",
+      "유제품",
+      "식혜",
+    ],
   },
   // 추가 분류 및 태그들...
 ];
@@ -173,10 +195,10 @@ const TagSetting = () => {
 
     // 선택된 태그들을 signupData 객체에 추가
     parsedData.tags = selectedTags;
-    
-    // 변경된 데이터를 localStorage에 저장    
+
+    // 변경된 데이터를 localStorage에 저장
     localStorage.setItem("signupData", JSON.stringify(parsedData)); // 변경된 데이터를 다시 저장
-    navigate('/findsetting');
+    navigate("/findsetting");
   };
   return (
     <RealContainer>
@@ -196,9 +218,9 @@ const TagSetting = () => {
                 {category.tags.map((tag) => (
                   <div key={tag} onClick={() => toggleTag(tag)}>
                     {isTagSelected(tag) ? (
-                      <SelectedTag>{'#' + tag}</SelectedTag>
+                      <SelectedTag>{"#" + tag}</SelectedTag>
                     ) : (
-                      <Tag>{'#' + tag}</Tag>
+                      <Tag>{"#" + tag}</Tag>
                     )}
                   </div>
                 ))}
