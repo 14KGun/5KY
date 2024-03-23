@@ -9,12 +9,11 @@ const Container = styled.div`
   max-width: 600px;
   width: 100%;
   margin: auto;
-  min-height: 100vh;  // Ensure it's at least the full height of the viewport
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 `;
-
 
 const Greeting = styled.h1`
   color: #000000;
@@ -26,8 +25,9 @@ const Greeting = styled.h1`
 const Nickname = styled.span`
   font-weight: bold;
   font-size: 32px;
-  color: #ff4b5c; /* Or any other color to emphasize */
+  color: #ff4b5c;
 `;
+
 const SubText = styled.div`
   margin-bottom: 1rem;
   text-align: start;
@@ -80,6 +80,7 @@ const Slider = styled.span`
     border-radius: 50%;
   }
 `;
+
 const Input = styled.input`
   padding: 10px;
   margin-bottom: 20px;
@@ -98,9 +99,11 @@ const GenderButton = styled.button`
     outline: none;
   }
 `;
-const EmphasizedText = styled.span`
-  color: #ff4b5c; /* Color for the emphasized text */
-  font-weight: bold;
+const Title = styled.h2`
+  font-size: 1.5em;
+  margin-right: 10px;
+  display: inline;
+  color: #000000; 
 `;
 
 const ConfirmButton = styled.button`
@@ -119,17 +122,35 @@ const ConfirmButton = styled.button`
 
 // Main component
 const FindSetting = () => {
-  const [gender, setGender] = useState("none"); // 'male', 'female', 'none'
+  const [gender, setGender] = useState("none");
+  const [genderFriend, setGenderFriend] = useState("none");
+  const [toggle, setToggle] = useState(false); // New state for toggle
+  const [toggleFriend, setToggleFriend] = useState(false); // New state for friend toggle
+  const [minAge, setMinAge] = useState("");
+  const [maxAge, setMaxAge] = useState("");
+  const [minAgeFriend, setMinAgeFriend] = useState("");
+  const [maxAgeFriend, setMaxAgeFriend] = useState("");
+  const navigate = useNavigate();
 
   const handleGenderSelect = (selectedGender) => {
     setGender(selectedGender);
   };
+  const handleGenderSelectFriend = (selectedGenderFriend) => {
+    setGenderFriend(selectedGenderFriend);
+  };
 
-  let navigate = useNavigate();
+  const handleToggle = () => {
+    setToggle(!toggle); // Update the toggle status
+  };
+
+  const handleToggleFriend = () => {
+    setToggleFriend(!toggleFriend);
+  };
 
   const handleConfirm = () => {
-    navigate("/"); // This will navigate to the root path '/'
+    navigate("/");
   };
+
   const nickname = "닉네임";
 
   return (
@@ -140,40 +161,137 @@ const FindSetting = () => {
       <SubText>
         당신이 원하는 만남을 알려주세요.
         <br />
-        당신이 바라는 사람을 <EmphasizedText>우연</EmphasizedText>이
-        발견해줄게요 :)
+        당신이 바라는 사람을 우연이 발견해줄게요 :)
       </SubText>
-
-      <ToggleContainer>
-        <ToggleLabel>
-          <ToggleInput type="checkbox" />
-          <Slider />
-        </ToggleLabel>
-      </ToggleContainer>
-      <Input type="number" placeholder="나이 입력" />
-
-      {/* Gender selection */}
-      <div>
-        <GenderButton
-          active={gender === "male"}
-          onClick={() => handleGenderSelect("male")}
-        >
-          남성
-        </GenderButton>
-        <GenderButton
-          active={gender === "female"}
-          onClick={() => handleGenderSelect("female")}
-        >
-          여성
-        </GenderButton>
-        <GenderButton
-          active={gender === "none"}
-          onClick={() => handleGenderSelect("none")}
-        >
-          상관없음
-        </GenderButton>
+      
+      <div
+        style={{ display: "flex", alignItems: "flex-between", marginBottom: "1rem" }}
+      >
+        <Title>친구 찾기</Title>
+        <ToggleContainer>
+          <ToggleLabel>
+            <ToggleInput
+              type="checkbox"
+              onChange={handleToggleFriend}
+              checked={toggleFriend}
+            />
+            <Slider />
+          </ToggleLabel>
+        </ToggleContainer>
       </div>
 
+      {toggleFriend && (
+        <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <SubText>연령 </SubText>
+            <Input
+              type="number"
+              value={minAgeFriend}
+              onChange={(e) => setMinAgeFriend(e.target.value)}
+              placeholder="최소 연령"
+            />
+            <SubText>살 이상 </SubText>
+            <Input
+              type="number"
+              value={maxAgeFriend}
+              onChange={(e) => setMaxAgeFriend(e.target.value)}
+              placeholder="최대 연령"
+            />
+            <SubText>살 이하</SubText>
+          </div>
+          <div>
+            <GenderButton
+              active={genderFriend === "male"}
+              onClick={() => handleGenderSelectFriend("male")}
+            >
+              남성
+            </GenderButton>
+            <GenderButton
+              active={genderFriend === "female"}
+              onClick={() => handleGenderSelectFriend("female")}
+            >
+              여성
+            </GenderButton>
+            <GenderButton
+              active={genderFriend === "none"}
+              onClick={() => handleGenderSelectFriend("none")}
+            >
+              상관없음
+            </GenderButton>
+          </div>
+          
+        </>
+      )}
+<div
+        style={{ display: "flex", alignItems: "flex-between", marginBottom: "1rem" }}
+      >
+        <Title>연인 찾기</Title>
+        <ToggleContainer>
+          <ToggleLabel>
+            <ToggleInput
+              type="checkbox"
+              onChange={handleToggle}
+              checked={toggle}
+            />
+            <Slider />
+          </ToggleLabel>
+        </ToggleContainer>
+      </div>
+
+      {toggle && (
+        <>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <SubText>연령 </SubText>
+            <Input
+              type="number"
+              value={minAge}
+              onChange={(e) => setMinAge(e.target.value)}
+              placeholder="최소 연령"
+            />
+            <SubText>살 이상 </SubText>
+            <Input
+              type="number"
+              value={maxAge}
+              onChange={(e) => setMaxAge(e.target.value)}
+              placeholder="최대 연령"
+            />
+            <SubText>살 이하</SubText>
+          </div>
+          <div>
+            <GenderButton
+              active={gender === "male"}
+              onClick={() => handleGenderSelect("male")}
+            >
+              남성
+            </GenderButton>
+            <GenderButton
+              active={gender === "female"}
+              onClick={() => handleGenderSelect("female")}
+            >
+              여성
+            </GenderButton>
+            <GenderButton
+              active={gender === "none"}
+              onClick={() => handleGenderSelect("none")}
+            >
+              상관없음
+            </GenderButton>
+          </div>
+          
+        </>
+      )}
       <ConfirmButton onClick={handleConfirm}>확인</ConfirmButton>
     </Container>
   );
