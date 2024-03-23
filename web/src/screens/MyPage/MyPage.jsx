@@ -1,8 +1,16 @@
+import React from "react";
+import useSWR from "swr";
+import Container from "@mui/material/Container";
+
 const MyPage = () => {
-    return (
-      <div>
-        <h1>마이페이지</h1>
-      </div>
-    );};
-  
-  export default MyPage;
+  //useSWR config mutate?
+  const { data } = useSWR("/user/byMe");
+
+  return (
+    <Container maxWidth="">
+      <h1>MyPage</h1>
+    </Container>
+  );
+};
+
+export default MyPage;
