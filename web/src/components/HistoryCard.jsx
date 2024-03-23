@@ -54,10 +54,11 @@ const HistoryCard = ({
   metCount,
   isHeartFilled,
   onHeartClick,
+  onCardClick,
 }) => {
   return (
     // const image = () => { isHeartFilled ? {heart_on} : {heart_off}};
-    <Card>
+    <Card onClick={onCardClick}>
       <HeartIcon onClick={() => onHeartClick(id)}>
         {isHeartFilled ? <Img src={heart_on} /> : <Img src={heart_off} />}
         {/* <Heart src={isHeartFilled ? { heart_on } : { heart_off }}></Heart> */}
