@@ -90,6 +90,7 @@ const Login = () => {
   const onClickLogin = useCallback(async () => {
     try {
       const { data } = await instance.post("/auth", { id, password: pw });
+      navigate("/");
     } catch (error) {
       console.log(error);
     }
