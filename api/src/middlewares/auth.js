@@ -18,7 +18,7 @@ module.exports = async (req, res, next) => {
         age: user.age,
         gender: user.gender,
       };
-      req.session.save();
+      await req.session.save();
       req.user = req.session.user;
       req.isLogin = true;
     }

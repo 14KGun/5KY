@@ -35,14 +35,28 @@ const router = express.Router();
  *                  gender:
  *                    type: string
  *                    enum: [male, female]
- *                  location:
+ *                  friend:
  *                    type: object
- *                    required: [latitude, longitude]
+ *                    required: [minAge, maxAge, gender]
  *                    properties:
- *                      latitude:
+ *                      minAge:
  *                        type: number
- *                      longitude:
+ *                      maxAge:
  *                        type: number
+ *                      gender:
+ *                        type: string
+ *                        enum: [male, female]
+ *                  lover:
+ *                    type: object
+ *                    required: [minAge, maxAge, gender]
+ *                    properties:
+ *                      minAge:
+ *                        type: number
+ *                      maxAge:
+ *                        type: number
+ *                      gender:
+ *                        type: string
+ *                        enum: [male, female]
  */
 router.get(
   "/byMe",
@@ -60,6 +74,8 @@ router.get(
       tags: user.tags,
       age: user.age,
       gender: user.gender,
+      friend: user.friend,
+      lover: user.lover,
     });
   })
 );
@@ -93,6 +109,28 @@ router.get(
  *                  type: string
  *                password:
  *                  type: string
+ *                friend:
+ *                  type: object
+ *                  required: [minAge, maxAge, gender]
+ *                  properties:
+ *                    minAge:
+ *                      type: number
+ *                    maxAge:
+ *                      type: number
+ *                    gender:
+ *                      type: string
+ *                      enum: [male, female]
+ *                lover:
+ *                  type: object
+ *                  required: [minAge, maxAge, gender]
+ *                  properties:
+ *                    minAge:
+ *                      type: number
+ *                    maxAge:
+ *                      type: number
+ *                    gender:
+ *                      type: string
+ *                      enum: [male, female]
  *      responses:
  *        200:
  *          content:
@@ -112,6 +150,8 @@ router.post(
       gender: req.body.gender,
       id: req.body.id,
       password: req.body.password,
+      friend: req.body.friend,
+      lover: req.body.lover,
     });
     res.send(user._id);
   })

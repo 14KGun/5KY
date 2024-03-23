@@ -1,0 +1,12 @@
+@font-face {
+  font-family: "Pretendard-Regular";
+  src: url(./fonts/Pretendard-Medium.ttf) format("truetype");
+}
+
+body {
+  font-family: "Pretendard-Regular" !important;
+}
+
+.font-apply {
+  font-family: "Pretendard-Regular" !important;
+}

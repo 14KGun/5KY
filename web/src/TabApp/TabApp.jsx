@@ -3,12 +3,18 @@ import History from '../screens/History';
 import Main from '../screens/Main/Main';
 import MyPage from '../screens/MyPage/MyPage';
 import useSWR from 'swr';
+import instance from '../utils/instance';
+import { useCookies } from 'react-cookie';
 
 const TabApp = () => {
-  const { data, error, isLoading } = useSWR("/user/byMe");
+  const [cookies] = useCookies(['userId']);
+  console.log(cookies);
+  const id = cookies.userId;
+  console.log(id);
+  const { data, error, isLoading } = useSWR(id ? `/user/byMe?userId=${id}` : null);
   const [activeTab, setActiveTab] = useState('tab2');
-
-  console.log(data);
+  
+  console.log(JSON.stringify(data));
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -28,8 +34,9 @@ const TabApp = () => {
 
   return (
     <div>
+      {JSON.stringify(data)}
       {JSON.stringify(error)}
-      {isLoading}
+      {isLoading ? 'Loading...' : ''};
       <div className="tab-content">
         {renderTabContent()}
       </div>

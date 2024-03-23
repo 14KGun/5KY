@@ -80,6 +80,7 @@ const TagContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+
 `;
 
 const Tags = styled.div`
@@ -87,6 +88,7 @@ const Tags = styled.div`
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
+
 `;
 
 const Tag = styled.div`
@@ -96,15 +98,21 @@ const Tag = styled.div`
   border: 0px solid transparent;
   border-radius: 17px;
   margin: 5px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 `;
 
-const Profile = () => {
+const Profile = ({ name }) => {
   return (
     <Container>
       <Headers>
         <Header>
           <Names>
-            <Name>박정민</Name>님
+
+            <Name>{name}</Name>님
           </Names>
           <Setting></Setting>
         </Header>
@@ -117,15 +125,17 @@ const Profile = () => {
         <TagContainer>
           취미
           <Tags>
-            <Tag></Tag>
-            <Tag></Tag>
+
+            <Tag>#영화</Tag>
+            <Tag>#애니</Tag>
           </Tags>
         </TagContainer>
         <TagContainer>
           취미
           <Tags>
-            <Tag></Tag>
-            <Tag></Tag>
+
+            <Tag>#유튜브</Tag>
+            <Tag>#애니</Tag>
           </Tags>
         </TagContainer>
       </TagContainers>
