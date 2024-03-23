@@ -4,6 +4,8 @@ const authGuard = require("../middlewares/authGuard");
 const wrapAsyncController = require("../modules/wrapAsyncController");
 const router = express.Router();
 
+const locationRecord = {};
+
 /**
  * @swagger
  *  /user/byMe:
@@ -47,7 +49,7 @@ router.get(
   "/byMe",
   authGuard,
   wrapAsyncController(async (req, res) => {
-    const user = await userModel.findById(req.session.user._id);
+    const user = await userModel.findById(req.user._id);
     if (!user) {
       res.status(404).send("Not Found");
       return;
@@ -121,34 +123,30 @@ router.post(
  *  /user/location/byMe:
  *    get:
  *      summary: 내 위치 정보 조회
- *      tags: [user/location(X)]
- *      produces:
- *      - application/json
- *      requestBody:
- *        required: true
- *        content:
- *          application/json:
- *            schema:
- *              type: object
- *              required: [latitude, longitude]
- *              properties:
- *                latitude:
- *                  type: number
- *                longitude:
- *                  type: number
+ *      tags: [user/location]
  *      responses:
  *        200:
  *          content:
  *            application/json:
  *              schema:
- *                type: string
- *                description: 유저 아이디
- *                example: "유저 아이디"
+ *                type: object
+ *                required: [latitude, longitude]
+ *                properties:
+ *                  latitude:
+ *                    type: number
+ *                  longitude:
+ *                    type: number
  */
 router.get(
   "/location/byMe",
+  authGuard,
   wrapAsyncController(async (req, res) => {
-    res.send("Success");
+    const location = locationRecord[req.user._id.toString()];
+    if (!location) {
+      res.status(404).send("Not Found");
+      return;
+    }
+    res.send(location);
   })
 );
 
@@ -157,7 +155,7 @@ router.get(
  *  /user/location/byMe:
  *    put:
  *      summary: 내 위치 정보 업데이트
- *      tags: [user/location(X)]
+ *      tags: [user/location]
  *      produces:
  *      - application/json
  *      requestBody:
@@ -183,8 +181,20 @@ router.get(
  */
 router.put(
   "/location/byMe",
+  authGuard,
   wrapAsyncController(async (req, res) => {
-    res.send("Success");
+    if (
+      typeof req.body.latitude !== "number" ||
+      typeof req.body.longitude !== "number"
+    ) {
+      res.status(400).send("Bad Request");
+      return;
+    }
+    locationRecord[req.user._id.toString()] = {
+      latitude: req.body.latitude,
+      longitude: req.body.longitude,
+    };
+    res.send(req.user._id);
   })
 );
 
