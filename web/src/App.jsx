@@ -1,6 +1,7 @@
 import { SWRConfig } from "swr";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import instance from "@/utils/instance";
+import Component from "./components/example";
 
 const SWRValue = {
   refreshInterval: 1000 * 60,
@@ -12,7 +13,7 @@ const App = () => {
     <SWRConfig value={SWRValue}>
       <BrowserRouter>
         <Routes>
-          <Route path="/" />
+          <Route path="/" element={<Component/>}/>
         </Routes>
       </BrowserRouter>
     </SWRConfig>
