@@ -14,7 +14,7 @@ router.use(
           title: "5KY API Docs",
           description: "날 참고해랏",
         },
-        servers: [{ url: "http://localhost:3000" }],
+        servers: [{ url: "http://localhost:8080" }],
         basePath: "/",
       },
       apis: ["./src/routes/*.js"], //Swagger 파일 연동

@@ -17,4 +17,5 @@ module.exports.connectDatabase = () => {
   });
 };
 module.exports.chatModel = require("./chat.model");
+module.exports.historyModel = require("./history.model");
 module.exports.userModel = require("./user.model");

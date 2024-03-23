@@ -20,6 +20,7 @@ app.use("/auth", require("./src/routes/auth"));
 app.use("/chat", require("./src/routes/chat"));
 app.use("/history", require("./src/routes/history"));
 app.use("/user", require("./src/routes/user"));
+app.use(require("./src/middlewares/globalError"));
 
 https: http
   .createServer(app)
