@@ -157,7 +157,7 @@ const FindSetting = () => {
       // instance를 사용하여 /user 엔드포인트에 POST 요청
       const response = await instance.post("/user", signupData);
       console.log("회원가입 성공:", response.data);
-      // 회원가입 성공 후 처리, 예를 들어 로그인 페이지로 이동
+      localStorage.removeItem("signupData");
       navigate("/login");
     } catch (error) {
       console.error("회원가입 실패:", error.response ? error.response.data : error);
