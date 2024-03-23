@@ -1,4 +1,6 @@
 const express = require("express");
+const userModel = require("../modules/models/user.model");
+const wrapAsyncController = require("../modules/wrapAsyncController");
 const router = express.Router();
 
 /**
@@ -7,29 +9,20 @@ const router = express.Router();
  *    get:
  *      summary: 내 유저 정보 조회 (로그인 한 내 정보 조회)
  *      tags: [user]
- *      produces:
- *      - application/json
- *      parameters:
- *        - in: body
- *          name: category
- *          required: false
- *          schema:
- *            type: object
- *            required:
- *              - category
- *            properties:
- *              userName:
- *                type: string
- *              firstName:
- *                type: string
  *      responses:
- *       200:
- *        description: 로그인 성공
+ *        200:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: object
+ *                description: 유저 아이디
  */
-router.get("/byMe", (req, res) => {
-  console.log("POST /");
-  res.send("POST /");
-});
+router.get(
+  "/byMe",
+  wrapAsyncController(async (req, res) => {
+    res.send("Success");
+  })
+);
 
 /**
  * @swagger
@@ -37,29 +30,47 @@ router.get("/byMe", (req, res) => {
  *    post:
  *      summary: 유저 정보 생성 (회원가입)
  *      tags: [user]
- *      produces:
- *      - text/plain
- *      parameters:
- *        - in: body
- *          name: category
- *          required: false
- *          schema:
- *            type: object
- *            required:
- *              - category
- *            properties:
- *              userName:
- *                type: string
- *              firstName:
- *                type: string
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required: [name, tags, age, id, password]
+ *              properties:
+ *                name:
+ *                  type: string
+ *                tags:
+ *                  type: array
+ *                  items:
+ *                    type: string
+ *                age:
+ *                  type: number
+ *                id:
+ *                  type: string
+ *                password:
+ *                  type: string
  *      responses:
- *       200:
- *        description: 로그인 성공
+ *        200:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                description: 유저 아이디
  */
-router.post("/", (req, res) => {
-  console.log("POST /");
-  res.send("POST /");
-});
+router.post(
+  "/",
+  wrapAsyncController(async (req, res) => {
+    const user = await userModel.create({
+      name: req.body.name,
+      tags: req.body.tags,
+      age: req.body.age,
+      id: req.body.id,
+      password: req.body.password,
+    });
+    res.send(user._id);
+  })
+);
 
 /**
  * @swagger
@@ -68,27 +79,31 @@ router.post("/", (req, res) => {
  *      summary: 내 유저 정보 업데이트 (위치 정보 수정 등)
  *      tags: [user]
  *      produces:
- *      - text/plain
- *      parameters:
- *        - in: body
- *          name: category
- *          required: false
- *          schema:
- *            type: object
- *            required:
- *              - category
- *            properties:
- *              userName:
- *                type: string
- *              firstName:
- *                type: string
+ *      - application/json
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              properties:
+ *                locationLatitude:
+ *                  type: number
+ *                locationLongitude:
+ *                  type: number
  *      responses:
- *       200:
- *        description: 로그인 성공
+ *        200:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                description: 유저 아이디
  */
-router.patch("/byMe", (req, res) => {
-  console.log("POST /");
-  res.send("POST /");
-});
+router.patch(
+  "/byMe",
+  wrapAsyncController(async (req, res) => {
+    res.send("Success");
+  })
+);
 
 module.exports = router;

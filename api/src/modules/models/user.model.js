@@ -8,6 +8,8 @@ const userSchema = Schema(
     age: { type: Number, required: true },
     id: { type: String, required: true, unique: true },
     password: { type: String, required: true },
+    locationLatitude: { type: Number, required: false },
+    locationLongitude: { type: Number, required: false },
   },
   { timestamps: true }
 );
