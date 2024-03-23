@@ -1,5 +1,6 @@
 import "./Login.css";
 import styled from "styled-components";
+import { useNavigate } from 'react-router-dom';
 
 const Container = styled.div`
   width: 100vw;
@@ -80,6 +81,11 @@ const SignupBtn = styled.div`
 `;
 
 const Login = () => {
+  const navigate = useNavigate();
+
+  const handleSignupClick = () => {
+    navigate('/signup');
+  };
   return (
     <Container>
       <Title>WOOYEON?</Title>
@@ -94,7 +100,7 @@ const Login = () => {
       <LoginBtn>로그인</LoginBtn>
       <ToSignUp>
         <Info>아직 계정이 없으신가요?</Info>
-        <SignupBtn>회원가입</SignupBtn>
+        <SignupBtn onClick={handleSignupClick}>회원가입</SignupBtn>
       </ToSignUp>
     </Container>
   );
