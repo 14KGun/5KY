@@ -31,7 +31,6 @@ const TabApp = () => {
 
   return (
     <div>
-      {data}
       {JSON.stringify(error)}
       {isLoading}
       <div className="tab-content">
