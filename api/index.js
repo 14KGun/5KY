@@ -4,7 +4,7 @@ const app = express();
 
 require("./src/modules/models").connectDatabase();
 
-app.use(require("cors")({ credentials: true }));
+app.use(require("cors")({ credentials: true, origin: ['https://deploy-preview-9--steady-cendol-ea8fc9.netlify.app','http://localhost:5173'] }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
