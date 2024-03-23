@@ -3,6 +3,29 @@
   src: url(./fonts/Pretendard-Medium.ttf) format("truetype");
 }
 
+@font-face {
+  font-family: "Pretendard-Bold";
+  src: url(./fonts/Pretendard-Bold.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Pretendard-Light";
+  src: url(./fonts/Pretendard-Light.ttf) format("truetype");
+}
+@font-face {
+  font-family: "Pretendard-ExtraLight";
+  src: url(./fonts/Pretendard-ExtraLight.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Pretendard-Thin";
+  src: url(./fonts/Pretendard-Thin.ttf) format("truetype");
+}
+
+@font-face {
+  font-family: "Pretendard-Black";
+  src: url(./fonts/Pretendard-Black.ttf) format("truetype");
+}
+
 body {
   font-family: "Pretendard-Regular" !important;
 }
