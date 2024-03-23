@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 import instance from "../../utils/instance";
-import { useCookies } from 'react-cookie';
+// import { useCookies } from 'react-cookie';
 
 const Container = styled.div`
   width: 100vw;
@@ -84,7 +84,7 @@ const SignupBtn = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
-  const [cookies, setCookie] = useCookies(['userId']);
+  const [cookies, setCookie] = useCookies(["userId"]);
   const [id, setId] = useState();
   const [pw, setPw] = useState();
 
@@ -92,7 +92,7 @@ const Login = () => {
     try {
       const { data } = await instance.post("/auth", { id, password: pw });
       //console.log(data);
-      setCookie('userId', data, { path: '/', maxAge: 30 * 24 * 60 * 60 });
+      setCookie("userId", data, { path: "/", maxAge: 30 * 24 * 60 * 60 });
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -102,7 +102,7 @@ const Login = () => {
   const handleSignupClick = () => {
     navigate("/signup");
   };
-  
+
   return (
     <Container>
       <Title>WOOYEON?</Title>
