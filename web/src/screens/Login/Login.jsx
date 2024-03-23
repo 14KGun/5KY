@@ -91,8 +91,8 @@ const Login = () => {
   const onClickLogin = useCallback(async () => {
     try {
       const { data } = await instance.post("/auth", { id, password: pw });
-      console.log(data);
-      setCookie('userId', data);
+      //console.log(data);
+      setCookie('userId', data, { path: '/', maxAge: 30 * 24 * 60 * 60 });
       navigate("/");
     } catch (error) {
       console.log(error);
