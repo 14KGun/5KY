@@ -3,22 +3,28 @@ const router = express.Router();
 
 /**
  * @swagger
- *  /:
+ *  /auth:
  *    post:
- *      description: 로그인
+ *      summary: 로그인
  *      tags: [auth]
  *      produces:
- *      - application/json
+ *      - text/plain
  *      parameters:
- *        - in: query
+ *        - in: body
  *          name: category
  *          required: false
  *          schema:
- *            type: integer
- *            description: 카테고리
+ *            type: object
+ *            required:
+ *              - category
+ *            properties:
+ *              userName:
+ *                type: string
+ *              firstName:
+ *                type: string
  *      responses:
  *       200:
- *        description: 제품 조회 성공
+ *        description: 로그인 성공
  */
 router.post("/", (req, res) => {
   console.log("POST /");
@@ -27,15 +33,15 @@ router.post("/", (req, res) => {
 
 /**
  * @swagger
- *  /:
+ *  /auth:
  *    delete:
- *      description: 로그아웃
+ *      summary: 로그아웃
  *      tags: [auth]
  *      produces:
- *      - application/json
+ *      - text/plain
  *      responses:
  *       200:
- *        description: 제품 조회 성공
+ *        description: 로그아웃 성공
  */
 router.delete("/", (req, res) => {
   res.send("Success");

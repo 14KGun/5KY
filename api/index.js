@@ -12,8 +12,11 @@ app.use(
   })
 );
 
+app.use("/api-docs", require("./src/routes/apidocs"));
 app.use("/auth", require("./src/routes/auth"));
-app.use("/api-docs", require("./src/routes/docs"));
+app.use("/chat", require("./src/routes/chat"));
+app.use("/history", require("./src/routes/history"));
+app.use("/user", require("./src/routes/user"));
 
 https: http
   .createServer(app)
