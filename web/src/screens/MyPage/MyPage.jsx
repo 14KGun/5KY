@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import { Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import CustomButton from "../../components/PrimaryButton";
@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import CustomizedSwitches from "../../components/Btn";
 import reallogo from "../../assets/real_logo.svg";
 import styled from "styled-components";
+import useSWR from "swr";
+import { useCookies } from "react-cookie";
 
 function valuetext(value) {
   return `${value}°C`;
@@ -33,6 +35,15 @@ const Margin = styled.div`
 `;
 
 const MyPage = () => {
+  const [cookies] = useCookies(["userId"]);
+  const id = cookies.userId;
+
+  const { data, error, isLoading } = useSWR(
+    id ? `/user/byMe?userId=${id}` : null
+  );
+  const [friendshipToggle, setFriendshipToggle] = useState(true);
+  const [loveToggle, setLoveToggle] = useState(true);
+
   const [value, setValue] = React.useState([20, 37]);
 
   const handleChange = (event, newValue) => {
@@ -137,110 +148,118 @@ const MyPage = () => {
                   >
                     우정의 우연
                   </Box>
-                  <CustomizedSwitches></CustomizedSwitches>
+                  <CustomizedSwitches
+                    checked={friendshipToggle}
+                    onChange={() => setFriendshipToggle(!friendshipToggle)}
+                  />
                 </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginLeft: "15px",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      fontSize: "20px",
-                      marginRight: "15px",
-                      color: "#7e7e7e",
-                    }}
-                  >
-                    연령
-                    <Box sx={{ width: 200, marginLeft: "20px" }}>
-                      <Slider
-                        getAriaLabel={() => "Temperature range"}
-                        value={value}
-                        onChange={handleChange}
-                        valueLabelDisplay="auto"
-                        size="small"
-                        // getAriaValueText={valuetext}
-                      />
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginLeft: "15px",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      fontSize: "20px",
-                      marginRight: "15px",
-                      marginBottom: "10px",
-                      color: "#7e7e7e",
-                    }}
-                  >
-                    성별
+                {friendshipToggle && (
+                  <div>
                     <Box
                       sx={{
-                        width: 200,
-                        marginLeft: "20px",
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
+                        marginLeft: "15px",
                       }}
                     >
                       <Box
                         sx={{
-                          width: "36px",
-                          height: "25px",
-                          bgcolor: "#FF8E5E",
-                          border: "0px solid transparent",
-                          borderRadius: "12px",
-                          color: "white",
-                          textAlign: "center",
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          fontSize: "20px",
+                          marginRight: "15px",
+                          color: "#7e7e7e",
                         }}
                       >
-                        남
-                      </Box>
-                      <Box
-                        sx={{
-                          width: "36px",
-                          height: "25px",
-                          bgcolor: "#FF8E5E",
-                          border: "0px solid transparent",
-                          borderRadius: "12px",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        여
-                      </Box>
-                      <Box
-                        sx={{
-                          width: "36px",
-                          height: "25px",
-                          bgcolor: "#FF8E5E",
-                          border: "0px solid transparent",
-                          borderRadius: "12px",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        X
+                        연령
+                        <Box sx={{ width: 200, marginLeft: "20px" }}>
+                          <Slider
+                            getAriaLabel={() => "Temperature range"}
+                            value={value}
+                            onChange={handleChange}
+                            valueLabelDisplay="auto"
+                            size="small"
+                            // getAriaValueText={valuetext}
+                          />
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>
-                </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginLeft: "15px",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          fontSize: "20px",
+                          marginRight: "15px",
+                          marginBottom: "10px",
+                          color: "#7e7e7e",
+                        }}
+                      >
+                        성별
+                        <Box
+                          sx={{
+                            width: 200,
+                            marginLeft: "20px",
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              width: "36px",
+                              height: "25px",
+                              bgcolor: "#FF8E5E",
+                              border: "0px solid transparent",
+                              borderRadius: "12px",
+                              color: "white",
+                              textAlign: "center",
+                            }}
+                          >
+                            남
+                          </Box>
+                          <Box
+                            sx={{
+                              width: "36px",
+                              height: "25px",
+                              bgcolor: "#FF8E5E",
+                              border: "0px solid transparent",
+                              borderRadius: "12px",
+                              color: "white",
+                              textAlign: "center",
+                            }}
+                          >
+                            여
+                          </Box>
+                          <Box
+                            sx={{
+                              width: "36px",
+                              height: "25px",
+                              bgcolor: "#FF8E5E",
+                              border: "0px solid transparent",
+                              borderRadius: "12px",
+                              color: "white",
+                              textAlign: "center",
+                            }}
+                          >
+                            X
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </div>
+                )}
+
                 <Box
                   sx={{
                     display: "flex",
@@ -259,110 +278,115 @@ const MyPage = () => {
                     연애의 우연
                   </Box>
                   <CustomizedSwitches
-                    sx={{ marginTop: "30px" }}
-                  ></CustomizedSwitches>
+                    checked={loveToggle}
+                    onChange={() => setLoveToggle(!loveToggle)}
+                  />
                 </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginLeft: "15px",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      fontSize: "20px",
-                      marginRight: "15px",
-                      color: "#7e7e7e",
-                    }}
-                  >
-                    연령
-                    <Box sx={{ width: 200, marginLeft: "20px" }}>
-                      <Slider
-                        getAriaLabel={() => "Temperature range"}
-                        value={value}
-                        onChange={handleChange}
-                        valueLabelDisplay="auto"
-                        size="small"
-                        // getAriaValueText={valuetext}
-                      />
-                    </Box>
-                  </Box>
-                </Box>
-                <Box
-                  sx={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginLeft: "15px",
-                  }}
-                >
-                  <Box
-                    sx={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                      fontSize: "20px",
-                      marginRight: "15px",
-                      color: "#7e7e7e",
-                    }}
-                  >
-                    성별
+                {loveToggle && (
+                  <div>
                     <Box
                       sx={{
-                        width: 200,
-                        marginLeft: "20px",
                         display: "flex",
                         flexDirection: "row",
                         alignItems: "center",
+                        marginLeft: "15px",
                       }}
                     >
                       <Box
                         sx={{
-                          width: "36px",
-                          height: "25px",
-                          bgcolor: "#FF8E5E",
-                          border: "0px solid transparent",
-                          borderRadius: "12px",
-                          color: "white",
-                          textAlign: "center",
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          fontSize: "20px",
+                          marginRight: "15px",
+                          color: "#7e7e7e",
                         }}
                       >
-                        남
-                      </Box>
-                      <Box
-                        sx={{
-                          width: "36px",
-                          height: "25px",
-                          bgcolor: "#FF8E5E",
-                          border: "0px solid transparent",
-                          borderRadius: "12px",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        여
-                      </Box>
-                      <Box
-                        sx={{
-                          width: "36px",
-                          height: "25px",
-                          bgcolor: "#FF8E5E",
-                          border: "0px solid transparent",
-                          borderRadius: "12px",
-                          color: "white",
-                          textAlign: "center",
-                        }}
-                      >
-                        X
+                        연령
+                        <Box sx={{ width: 200, marginLeft: "20px" }}>
+                          <Slider
+                            getAriaLabel={() => "Temperature range"}
+                            value={value}
+                            onChange={handleChange}
+                            valueLabelDisplay="auto"
+                            size="small"
+                            // getAriaValueText={valuetext}
+                          />
+                        </Box>
                       </Box>
                     </Box>
-                  </Box>
-                </Box>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        marginLeft: "15px",
+                      }}
+                    >
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          fontSize: "20px",
+                          marginRight: "15px",
+                          color: "#7e7e7e",
+                        }}
+                      >
+                        성별
+                        <Box
+                          sx={{
+                            width: 200,
+                            marginLeft: "20px",
+                            display: "flex",
+                            flexDirection: "row",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Box
+                            sx={{
+                              width: "36px",
+                              height: "25px",
+                              bgcolor: "#FF8E5E",
+                              border: "0px solid transparent",
+                              borderRadius: "12px",
+                              color: "white",
+                              textAlign: "center",
+                            }}
+                          >
+                            남
+                          </Box>
+                          <Box
+                            sx={{
+                              width: "36px",
+                              height: "25px",
+                              bgcolor: "#FF8E5E",
+                              border: "0px solid transparent",
+                              borderRadius: "12px",
+                              color: "white",
+                              textAlign: "center",
+                            }}
+                          >
+                            여
+                          </Box>
+                          <Box
+                            sx={{
+                              width: "36px",
+                              height: "25px",
+                              bgcolor: "#FF8E5E",
+                              border: "0px solid transparent",
+                              borderRadius: "12px",
+                              color: "white",
+                              textAlign: "center",
+                            }}
+                          >
+                            X
+                          </Box>
+                        </Box>
+                      </Box>
+                    </Box>
+                  </div>
+                )}
               </Container>
             </Box>
             <InfoContainer>
@@ -374,11 +398,11 @@ const MyPage = () => {
                 <p>성별</p>
               </LabelContainers>
               <LabelContainer>
-                <p>jheon1223</p>
+                <p>{data.id}</p>
                 <p>*******</p>
                 <CustomizedSwitches></CustomizedSwitches>
-                <p>23</p>
-                <p>여성</p>
+                <p>{data.age}</p>
+                <p>{data.gender}</p>
               </LabelContainer>
             </InfoContainer>
           </Box>
