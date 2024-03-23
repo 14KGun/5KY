@@ -12,9 +12,9 @@ const Main = () => {
 
   return (
     <div>
-      <h1>메인페이지</h1>
-      <button onClick={goToFindSetting}>Find Setting으로 가기</button>
-      <Alarm></Alarm>
+      {/* <h1>메인페이지</h1> */}
+      {/* <button onClick={goToFindSetting}>Find Setting으로 가기</button> */}
+      {/* <Alarm></Alarm> */}
       <Profile></Profile>
     </div>
   );

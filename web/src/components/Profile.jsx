@@ -1,97 +1,136 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
+import setting from "../assets/setting.svg";
+import HistoryCard from "./HistoryCard";
 
-const ProfileContainer = styled.div`
-  background: #ffffff;
-  border-radius: 20px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  max-width: 350px; // Adjust width as needed
-  font-family: 'Roboto', sans-serif;
-  margin: auto;
+const Container = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Names = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: first baseline;
+`;
+
+const Setting = styled.div`
+  width: 32px;
+  height: 32px;
+  background-image: url(${setting});
+  maring &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Name = styled.div`
+  font-size: 40px;
+  color: #f36427;
+  font-weight: 800;
+`;
+const Headers = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
 `;
 
 const Header = styled.div`
+  width: 100vw;
   display: flex;
+  flex-direction: row;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  margin-bottom: 2rem;
+  justify-content: space-between;
+  font-size: 24px;
+  padding: 23px;
+  box-sizing: border-box;
 `;
-
-const Title = styled.h2`
-  color: #ff4b5c; // Adjust the color to match the design
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-right: 10px; // Add some space between the title and the description
-`;
-
-const Description = styled.p`
-  color: #000;
-  font-size: 1.1rem;
-  font-weight: normal;
-`;
-
 
 const Info = styled.div`
   display: flex;
-  justify-content: space-between;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-  & > span {
-    font-weight: bold;
-  }
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: flex-start;
+  font-size: 20px;
+  font-weight: 500;
+  padding-left: 23px;
+  box-sizing: border-box;
+`;
+
+const Bold = styled.div`
+  font-weight: 600;
+  color: #f36427;
+  margin-left: 5px;
+`;
+
+const TagContainers = styled.div`
+  width: 344px;
+  height: 199px;
+  background-color: #f3f3f3;
+  margin-top: 17px;
+  border: 0px solid transparent;
+  border-radius: 15px;
+`;
+
+const TagContainer = styled.div`
+  margin: 17px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const Tags = styled.div`
-  color: #000000;
-  font-size: 0.9rem;
-  font-weight: bold;
-  margin-bottom: 2rem;
-  text-align: center;
-`;
-
-const ActionsContainer = styled.div`
   display: flex;
-  justify-content: space-around;
-  margin-top: 1rem;
+  flex-direction: row;
+  align-items: flex-start;
+  flex-wrap: wrap;
 `;
 
-const ActionButton = styled.button`
-  background: transparent;
-  border: 2px solid #ccc;
-  border-radius: 20px;
-  padding: 10px 20px;
-  font-size: 0.9rem;
-  color: #000;
-  cursor: pointer;
-  &:hover {
-    background: #f0f0f0;
-  }
+const Tag = styled.div`
+  width: 72px;
+  height: 32px;
+  background-color: #ff8e5e;
+  border: 0px solid transparent;
+  border-radius: 17px;
+  margin: 5px;
 `;
 
 const Profile = () => {
   return (
-    <ProfileContainer>
-      <Header>
-        <Title>박정민</Title>
-        <Description>님이 12분 전에 우연을 울렸어요!</Description>
-      </Header>
-      <Info>
-        <span>성별</span> 여성
-        <span>연령</span> 23세
-      </Info>
-      <Tags>
-        #맛집탐방 #음악
-      </Tags>
-      <Tags>
-        #맛집탐방 #애니메이션 #음악
-      </Tags>
-      <ActionsContainer>
-        <ActionButton>채팅하기</ActionButton>
-        <ActionButton>닫기</ActionButton>
-      </ActionsContainer>
-    </ProfileContainer>
+    <Container>
+      <Headers>
+        <Header>
+          <Names>
+            <Name>박정민</Name>님
+          </Names>
+          <Setting></Setting>
+        </Header>
+
+        <Info>
+          오늘은 <Bold>2번의 우연</Bold>이 발생했습니다.
+        </Info>
+      </Headers>
+      <TagContainers>
+        <TagContainer>
+          취미
+          <Tags>
+            <Tag></Tag>
+            <Tag></Tag>
+          </Tags>
+        </TagContainer>
+        <TagContainer>
+          취미
+          <Tags>
+            <Tag></Tag>
+            <Tag></Tag>
+          </Tags>
+        </TagContainer>
+      </TagContainers>
+      <HistoryCard></HistoryCard>
+    </Container>
   );
 };
 
