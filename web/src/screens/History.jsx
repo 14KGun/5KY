@@ -82,6 +82,7 @@ const History = () => {
   const [historyData, setHistoryData] = useState(initialHistoryData);
   const [openProfile, setOpenProfile] = useState(false);
   const [selectedNickname, setSelectedNickname] = useState("");
+  const [selectedUser , setSelectedUser] = useState({});
 
   const [cookies] = useCookies(["userId"]);
   const id = cookies.userId;
@@ -115,9 +116,9 @@ const History = () => {
     setHistoryData(updatedHistory);
   };
 
-  const cardClick = (nickname) => {
+  const cardClick = (user) => {
     setOpenProfile(true);
-    setSelectedNickname(nickname);
+    setSelectedUser(user);
   };
 
   const allCoincidences = historyData.filter((item) => !item.isHeartFilled);
@@ -126,7 +127,7 @@ const History = () => {
     <>
       <Modal open={openProfile} onClose={() => setOpenProfile(false)}>
         <Box>
-          <About setOpenProfile={setOpenProfile} nickname={selectedNickname} />
+          <About setOpenProfile={setOpenProfile} user={selectedUser} />
         </Box>
       </Modal>
       <Container>
@@ -137,6 +138,7 @@ const History = () => {
             nickname={data.name}
             metCount={1}
             isHeartFilled={true}
+            user={data}
             onHeartClick={toggleHeart}
             onCardClick={cardClick}
           />
@@ -144,7 +146,6 @@ const History = () => {
 
         <SectionTitle>오늘의 우연</SectionTitle>
         {todaysCoincidences.map((data) => {
-          console.log("??",data);
           return (
           <HistoryCard
             key={data.id}
@@ -164,6 +165,7 @@ const History = () => {
             nickname={data.name}
             metCount={1}
             isHeartFilled={false}
+            user = {data}
             onHeartClick={toggleHeart}
             onCardClick={cardClick}
           />
