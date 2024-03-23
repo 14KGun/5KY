@@ -80,22 +80,22 @@ const SignupBtn = styled.div`
 
 const Login = () => {
   return (
-    <Container>
-      <Title>WOOYEON?</Title>
-      <IdContainer>
-        <Label>아이디</Label>
-        <Input type="text" placeholder="아이디를 입력해주세요"></Input>
-      </IdContainer>
-      <IdContainer>
-        <Label>비밀번호</Label>
-        <Input type="password" placeholder="비밀번호를 입력해주세요"></Input>
-      </IdContainer>
-      <LoginBtn>로그인</LoginBtn>
-      <ToSignUp>
-        <Info>아직 계정이 없으신가요?</Info>
-        <SignupBtn>회원가입</SignupBtn>
-      </ToSignUp>
-    </Container>
+      <Container>
+        <Title>WOOYEON?</Title>
+        <IdContainer>
+          <Label>아이디</Label>
+          <Input type="text" placeholder="아이디를 입력해주세요"></Input>
+        </IdContainer>
+        <IdContainer>
+          <Label>비밀번호</Label>
+          <Input type="password" placeholder="비밀번호를 입력해주세요"></Input>
+        </IdContainer>
+        <LoginBtn>로그인</LoginBtn>
+        <ToSignUp>
+          <Info>아직 계정이 없으신가요?</Info>
+          <SignupBtn>회원가입</SignupBtn>
+        </ToSignUp>
+      </Container>
   );
 };
 
