@@ -114,7 +114,6 @@ const Profile = ({ name, tags }) => {
 
             <Name>{name}</Name>님
           </Names>
-          <Setting></Setting>
         </Header>
 
         <Info>

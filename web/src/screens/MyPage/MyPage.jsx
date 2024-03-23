@@ -392,14 +392,12 @@ const MyPage = () => {
             <InfoContainer>
               <LabelContainers>
                 <p>아이디</p>
-                <p>비밀번호</p>
                 <Margin>알림</Margin>
                 <p>나이</p>
                 <p>성별</p>
               </LabelContainers>
               <LabelContainer>
                 <p>{data.id}</p>
-                <p>*******</p>
                 <CustomizedSwitches></CustomizedSwitches>
                 <p>{data.age}</p>
                 <p>{data.gender}</p>
