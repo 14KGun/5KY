@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 import HistoryCard from "../components/HistoryCard";
 import styled from "styled-components";
+import About from "../components/About";
+import { Box, Modal } from "@mui/material";
+import PrimaryButton from "../components/PrimaryButton";
 
 // 각 항목에 고유한 id 속성을 추가합니다.
 const initialHistoryData = [
@@ -74,6 +77,7 @@ const SectionTitle = styled.div`
 
 const History = () => {
   const [historyData, setHistoryData] = useState(initialHistoryData);
+  const [openProfile, setOpenProfile] = useState(false);
 
   // 북마크된 항목만 필터링합니다.
   const bookmarks = historyData.filter((item) => item.isHeartFilled);
@@ -88,24 +92,50 @@ const History = () => {
     setHistoryData(updatedHistory);
   };
 
+  const cardClick = () => {
+    setOpenProfile(true);
+  };
+
   const allCoincidences = historyData.filter((item) => !item.isHeartFilled);
 
   return (
-    <Container>
-      {bookmarks.map((data) => (
-        <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
-      ))}
+    <>
+      <Modal open={openProfile} onClose={() => setOpenProfile(false)}>
+        <Box>
+          <About setOpenProfile={setOpenProfile} />
+        </Box>
+      </Modal>
+      <Container>
+        {bookmarks.map((data) => (
+          <HistoryCard
+            key={data.id}
+            {...data}
+            onHeartClick={toggleHeart}
+            onCardClick={cardClick}
+          />
+        ))}
 
-      <SectionTitle>오늘의 우연</SectionTitle>
-      {todaysCoincidences.map((data) => (
-        <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
-      ))}
+        <SectionTitle>오늘의 우연</SectionTitle>
+        {todaysCoincidences.map((data) => (
+          <HistoryCard
+            key={data.id}
+            {...data}
+            onHeartClick={toggleHeart}
+            onCardClick={cardClick}
+          />
+        ))}
 
-      <SectionTitle>그 모든 우연</SectionTitle>
-      {allCoincidences.map((data) => (
-        <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
-      ))}
-    </Container>
+        <SectionTitle>그 모든 우연</SectionTitle>
+        {allCoincidences.map((data) => (
+          <HistoryCard
+            key={data.id}
+            {...data}
+            onHeartClick={toggleHeart}
+            onCardClick={cardClick}
+          />
+        ))}
+      </Container>
+    </>
   );
 };
 
