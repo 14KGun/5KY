@@ -19,14 +19,16 @@ const Main = () => {
   if (error) return <div>Error loading data</div>;
 
   // `data` 객체가 존재하고 `data.name` 속성이 있는지 확인
-  const userName = data && data.name ? data.name : "Default Name";
+
+  const userName = data && data.name ? data.name : 'Default Name';
+  const userTags = data && data.tags ? data.tags : [];
 
   console.log(data);
   return (
     <div>
       {/* <button onClick={goToFindSetting}>Find Setting으로 가기</button> */}
       {/* <Alarm></Alarm> */}
-      <Profile name={userName}></Profile>
+      <Profile name={userName} tags={userTags}></Profile>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+const userModel = require("../modules/models/user.model");
+
 const locationRecord = {};
 
 module.exports.getLocationRecord = (id) => {
@@ -10,7 +12,7 @@ module.exports.setLocationRecord = (id, location) => {
 
 module.exports.findNearUserPairs = async () => {
   const users = [];
-  for (const userId of locationRecord) {
+  for (const userId in locationRecord) {
     const user = await userModel.findById(userId).lean();
     if (user) users.push(user);
   }
@@ -28,7 +30,7 @@ module.exports.findNearUserPairs = async () => {
       }
 
       if (distance >= 1) {
-        pairs.push([user1, user2]);
+        pairs.push([user1._id, user2._id]);
       }
     }
   }

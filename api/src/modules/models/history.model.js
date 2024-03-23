@@ -5,6 +5,7 @@ const HistorySchema = Schema(
   {
     userIds: { type: [Schema.Types.ObjectId], ref: "User", required: true },
     joinAts: { type: [Date], required: true },
+    isBookmarked: { type: Boolean, required: true, default: false },
   },
   { timestamps: true }
 );
