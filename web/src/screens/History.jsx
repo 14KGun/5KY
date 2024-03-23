@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import HistoryCard from "../../components/HistoryCard/HistoryCard";
+import HistoryCard from "../components/HistoryCard";
 import styled from "styled-components";
 
 // 각 항목에 고유한 id 속성을 추가합니다.
