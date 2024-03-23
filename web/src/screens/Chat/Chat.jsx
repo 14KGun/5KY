@@ -2,6 +2,7 @@ import styled from "styled-components";
 import back from "../../assets/back.svg";
 import heart_on from "../../assets/heart_on.png";
 import date from "../../assets/date.svg";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const Container = styled.div`
   display: flex;
@@ -23,6 +24,9 @@ const Icon = styled.img`
   height: 25px;
   width: 25px;
   margin: 0px 10px;
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const Infos = styled.div`
@@ -139,10 +143,16 @@ const Img = styled.img`
 `;
 
 const Chat = () => {
+  const navigate = useNavigate();
   return (
     <Container>
       <Header>
-        <Icon src={back}></Icon>
+        <Icon
+          src={back}
+          onClick={() => {
+            navigate("/");
+          }}
+        ></Icon>
         <Icon src={heart_on}></Icon>
         제이
       </Header>

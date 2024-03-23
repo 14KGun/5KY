@@ -8,9 +8,12 @@ import { useCookies } from 'react-cookie';
 const Main = () => {
   let navigate = useNavigate();
   const [cookies] = useCookies(['userId']);
+
   const id = cookies.userId;
 
-  const { data, error, isLoading } = useSWR(id ? `/user/byMe?userId=${id}` : null);
+  const { data, error, isLoading } = useSWR(
+    id ? `/user/byMe?userId=${id}` : null
+  );
 
   useEffect(() => {
     // 여기에서 로그인 여부를 판단합니다.
@@ -26,13 +29,13 @@ const Main = () => {
   if (error) return <div>Error loading data</div>;
 
   // `data` 객체가 존재하고 `data.name` 속성이 있는지 확인
+
   const userName = data && data.name ? data.name : 'Default Name';
   const userTags = data && data.tags ? data.tags : [];
 
   console.log(data);
   return (
     <div>
-
       {/* <button onClick={goToFindSetting}>Find Setting으로 가기</button> */}
       {/* <Alarm></Alarm> */}
       <Profile name={userName} tags={userTags}></Profile>
