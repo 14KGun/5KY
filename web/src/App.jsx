@@ -1,7 +1,6 @@
 import { SWRConfig } from "swr";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import instance from "@/utils/instance";
-import TabApp from "./TabApp/TabApp";
 import MyPage from "./screens/MyPage/MyPage";
 import Main from "./screens/Main/Main";
 import Login from "./screens/Login/Login";
@@ -13,6 +12,9 @@ import TabFooter from "./components/TabFooter/TabFooter";
 import History from "./screens/History";
 
 const theme = createTheme({
+  typography: {
+    fontFamily: "Pretendard-Regular, Arial, sans-serif", // 폰트 선택 및 대체 폰트 지정
+  },
   palette: {
     background: {
       default: "#ffffff",
