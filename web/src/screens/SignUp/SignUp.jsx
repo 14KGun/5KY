@@ -1,9 +1,15 @@
 import styled from "styled-components";
 import logo from "./../../assets/logo.svg";
-import Select from "react-select";
+// import Select from "react-select";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 import instance from "../../utils/instance";
+import { Box, TextField, Typography } from "@mui/material";
+import CustomButton from "../../components/PrimaryButton";
+
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
 
 // import Dropdown from "react-bootstrap/Dropdown";
 // import DropdownButton from "react-bootstrap/DropdownButton";
@@ -50,7 +56,7 @@ const Input = styled.input`
   font-size: 12px;
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 2px #F36427;
+    box-shadow: 0px 0px 2px #f36427;
   }
 `;
 
@@ -61,7 +67,7 @@ const SignupBtn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #F36427;
+  background-color: #f36427;
   color: white;
   font-size: 16px;
   font-weight: 700;
@@ -82,6 +88,11 @@ const SignUp = () => {
   const [age, setAge] = useState();
   const [gender, setGender] = useState();
 
+  const handleChange = (event) => {
+    setGender(event.target.value);
+    console.log(gender);
+  };
+
   const onClickSignUp = useCallback(() => {
     // 입력값 검증 로직 (예: 비밀번호 확인 일치 여부) 추가 가능
     if (pw !== pwCheck) {
@@ -89,7 +100,10 @@ const SignUp = () => {
       return; // Stop the sign-up process
     }
     // Local Storage에 입력값 저장
-    localStorage.setItem('signupData', JSON.stringify({ id, password:pw, name, age, gender }));
+    localStorage.setItem(
+      "signupData",
+      JSON.stringify({ id, password: pw, name, age, gender })
+    );
 
     // /tagsetting 페이지로 이동
     navigate("/tagsetting");
@@ -124,14 +138,29 @@ const SignUp = () => {
           }}
         ></Input>
         <Label>성별</Label>
+        <FormControl sx={{ m: 1, width: 300, mt: 3 }}></FormControl>
         <Select
-          options={genders}
-          placeholder="성별을 선택해주세요"
-          id="genders"
+          sx={{
+            width: "287px",
+            height: "50px",
+            backgroundColor: "#fafafa",
+            borderRadius: "12px",
+            padding: "0 15px",
+            marginBottom: "24px",
+            fontSize: "12px",
+            "&:focus": {
+              outline: "none",
+              boxShadow: "0px 0px 2px #f36427",
+            },
+          }}
           value={gender}
-          onChange={(selectedOption) => setGender(selectedOption.value)}
-        />
-
+          onChange={handleChange}
+          displayEmpty
+        >
+          <MenuItem value={"남성"}>남성</MenuItem>
+          <MenuItem value={"여성"}>여성</MenuItem>
+          <MenuItem value={"밝히고 싶지 않음"}>밝히고 싶지 않음</MenuItem>
+        </Select>
         <Label>아이디</Label>
         <Input
           type="text"
