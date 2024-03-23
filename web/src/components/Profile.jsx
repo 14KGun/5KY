@@ -76,11 +76,11 @@ const TagContainers = styled.div`
 `;
 
 const TagContainer = styled.div`
+  margin: 17px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin: 15px 0px 0px 15px;
-  color: #616161;
+
 `;
 
 const Tags = styled.div`
@@ -88,6 +88,7 @@ const Tags = styled.div`
   flex-direction: row;
   align-items: flex-start;
   flex-wrap: wrap;
+
 `;
 
 const Tag = styled.div`
@@ -110,6 +111,7 @@ const Profile = ({ name }) => {
       <Headers>
         <Header>
           <Names>
+
             <Name>{name}</Name>님
           </Names>
           <Setting></Setting>
@@ -123,6 +125,7 @@ const Profile = ({ name }) => {
         <TagContainer>
           취미
           <Tags>
+
             <Tag>#영화</Tag>
             <Tag>#애니</Tag>
           </Tags>
@@ -130,6 +133,7 @@ const Profile = ({ name }) => {
         <TagContainer>
           취미
           <Tags>
+
             <Tag>#유튜브</Tag>
             <Tag>#애니</Tag>
           </Tags>

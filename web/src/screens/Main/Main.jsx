@@ -22,6 +22,7 @@ const Main = () => {
   console.log(data);
   return (
     <div>
+
       {/* <button onClick={goToFindSetting}>Find Setting으로 가기</button> */}
       {/* <Alarm></Alarm> */}
       <Profile name={userName}></Profile>
