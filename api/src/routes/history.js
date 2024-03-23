@@ -6,9 +6,7 @@ const router = express.Router();
  *  /byMe:
  *    get:
  *      summary: 내 히스토리 리스트 조회
- *      tags: [history]
- *      produces:
- *      - application/json
+ *      tags: [history(X)]
  *      parameters:
  *        - in: body
  *          name: category
@@ -33,18 +31,16 @@ router.get("/byMe", (req, res) => {
 
 /**
  * @swagger
- *  /byId/{historyId}:
+ *  /byId/{id}:
  *    get:
  *      summary: 히스토리 정보 조회
- *      tags: [history]
- *      produces:
- *      - application/json
+ *      tags: [history(X)]
  *      parameters:
- *       - in: path
- *         name: historyId
- *         required: true
- *         schema:
- *           type: string
+ *        - in: path
+ *          name: id
+ *          required: true
+ *          schema:
+ *            type: string
  *        - in: body
  *          name: category
  *          required: false

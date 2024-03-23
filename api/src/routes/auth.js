@@ -43,6 +43,7 @@ router.post(
       return;
     }
     req.session.user = {
+      _id: user._id,
       id: user.id,
       name: user.name,
       age: user.age,

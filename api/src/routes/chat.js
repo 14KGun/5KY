@@ -6,7 +6,7 @@ const router = express.Router();
  *  /chat:
  *    post:
  *      summary: 메시지 생성
- *      tags: [chat]
+ *      tags: [chat(X)]
  *      produces:
  *      - application/json
  *      parameters:
@@ -33,15 +33,15 @@ router.post("/", (req, res) => {
 
 /**
  * @swagger
- *  /chat/byHistoryId/{historyId}:
+ *  /chat/byHistoryId/{id}:
  *    get:
  *      summary: 히스토리의 메시지 리스트 조회
- *      tags: [chat]
+ *      tags: [chat(X)]
  *      produces:
  *      - text/plain
  *      parameters:
  *        - in: path
- *          name: historyId
+ *          name: id
  *          required: true
  *          schema:
  *            type: string
