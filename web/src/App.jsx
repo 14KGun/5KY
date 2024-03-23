@@ -6,17 +6,18 @@ import Login from "./screens/Login/Login";
 import SignUp from "./screens/SignUp/SignUp";
 import FindSetting from "./screens/FindSetting";
 import TagSetting from "./screens/TagSetting/TagSetting";
-
-import { red } from "@mui/material/colors";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
   palette: {
     background: {
-      default: "#ffffff", // Set your desired background color here
+      default: "#ffffff",
     },
     primary: {
-      main: red[500],
+      main: "#F36427",
+    },
+    secondary: {
+      main: "#FF8E5E",
     },
   },
 });
