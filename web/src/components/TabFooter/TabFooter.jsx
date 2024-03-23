@@ -1,4 +1,3 @@
-import './TabFooter.css'; // Footer 컴포넌트에 대한 CSS 스타일링
 
 // eslint-disable-next-line react/prop-types
 const TabFooter = ({ onTabChange }) => {

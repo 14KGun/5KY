@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import "./TagSetting.css";
 
 const RealContainer = styled.div`
   display: flex;
