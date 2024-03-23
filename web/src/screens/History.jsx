@@ -1,9 +1,12 @@
-import React, { useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import HistoryCard from "../components/HistoryCard";
 import styled from "styled-components";
 import About from "../components/About";
 import { Box, Modal } from "@mui/material";
 import PrimaryButton from "../components/PrimaryButton";
+import useSWR from "swr";
+import instance from "../utils/instance";
+import { useCookies } from "react-cookie";
 
 // 각 항목에 고유한 id 속성을 추가합니다.
 const initialHistoryData = [
@@ -78,7 +81,27 @@ const SectionTitle = styled.div`
 const History = () => {
   const [historyData, setHistoryData] = useState(initialHistoryData);
   const [openProfile, setOpenProfile] = useState(false);
+  const [selectedNickname, setSelectedNickname] = useState("");
 
+  const [cookies] = useCookies(["userId"]);
+  const id = cookies.userId;
+
+  // useCallback(async () => {
+  //   try {
+  //     const { data } = await instance.post("/history/byMe", { id, password: pw });
+  //     //console.log(data);
+  //     setCookie('userId', data, { path: '/', maxAge: 30 * 24 * 60 * 60 });
+  //     navigate("/");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [id, pw]);
+  const { data, error, isLoading } = useSWR(`/history/byMe?userId=${id}`);
+  useEffect(() => {
+    console.log(data? data[0].users:null);
+    setHistoryData(data? data[0].users : []);
+  }, [data]);
+  //console.log("zzz", data);
   // 북마크된 항목만 필터링합니다.
   const bookmarks = historyData.filter((item) => item.isHeartFilled);
   const today = new Date().toISOString().split("T")[0];
@@ -92,8 +115,9 @@ const History = () => {
     setHistoryData(updatedHistory);
   };
 
-  const cardClick = () => {
+  const cardClick = (nickname) => {
     setOpenProfile(true);
+    setSelectedNickname(nickname);
   };
 
   const allCoincidences = historyData.filter((item) => !item.isHeartFilled);
@@ -102,38 +126,48 @@ const History = () => {
     <>
       <Modal open={openProfile} onClose={() => setOpenProfile(false)}>
         <Box>
-          <About setOpenProfile={setOpenProfile} />
+          <About setOpenProfile={setOpenProfile} nickname={selectedNickname} />
         </Box>
       </Modal>
       <Container>
         {bookmarks.map((data) => (
           <HistoryCard
             key={data.id}
-            {...data}
+            id = {data.id}
+            nickname={data.name}
+            metCount={1}
+            isHeartFilled={true}
             onHeartClick={toggleHeart}
             onCardClick={cardClick}
           />
         ))}
 
         <SectionTitle>오늘의 우연</SectionTitle>
-        {todaysCoincidences.map((data) => (
+        {todaysCoincidences.map((data) => {
+          console.log("??",data);
+          return (
           <HistoryCard
             key={data.id}
             {...data}
             onHeartClick={toggleHeart}
             onCardClick={cardClick}
           />
-        ))}
-
+        )})}
+        
         <SectionTitle>그 모든 우연</SectionTitle>
-        {allCoincidences.map((data) => (
+        {allCoincidences.map((data) => {
+          console.log("??",data);
+          return(
           <HistoryCard
             key={data.id}
-            {...data}
+            id={data.id}
+            nickname={data.name}
+            metCount={1}
+            isHeartFilled={false}
             onHeartClick={toggleHeart}
             onCardClick={cardClick}
           />
-        ))}
+        )})}
       </Container>
     </>
   );
