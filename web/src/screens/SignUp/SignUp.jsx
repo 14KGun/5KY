@@ -50,7 +50,7 @@ const Input = styled.input`
   font-size: 12px;
   &:focus {
     outline: none;
-    box-shadow: 0px 0px 2px #ec407a;
+    box-shadow: 0px 0px 2px #F36427;
   }
 `;
 
@@ -61,7 +61,7 @@ const SignupBtn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ec407a;
+  background-color: #F36427;
   color: white;
   font-size: 16px;
   font-weight: 700;
@@ -82,21 +82,15 @@ const SignUp = () => {
   const [age, setAge] = useState();
   const [gender, setGender] = useState();
 
-  const onClickSignUp = useCallback(async () => {
-    try {
-      const { data } = await instance.post("/user", {
-        name,
-        tags: [""],
-        age,
-        gender,
-        id,
-        password: pw,
-      });
-      navigate("/login");
-    } catch (error) {
-      console.log(error);
-    }
-  }, [id, pw, pwCheck, name, age, gender]);
+  const onClickSignUp = useCallback(() => {
+    // 입력값 검증 로직 (예: 비밀번호 확인 일치 여부) 추가 가능
+
+    // Local Storage에 입력값 저장
+    localStorage.setItem('signupData', JSON.stringify({ id, pw, pwCheck, name, age, gender }));
+
+    // /tagsetting 페이지로 이동
+    navigate("/tagsetting");
+  }, [id, pw, pwCheck, name, age, gender, navigate]);
 
   return (
     <Container>
