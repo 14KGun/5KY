@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 import instance from "../../utils/instance";
-// import { useCookies } from 'react-cookie';
+import { useCookies } from 'react-cookie';
 
 const Container = styled.div`
   width: 100vw;

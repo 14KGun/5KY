@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Button } from "@mui/material";
 import CssBaseline from "@mui/material/CssBaseline";
 import CustomButton from "../../components/PrimaryButton";
@@ -34,17 +34,44 @@ const Margin = styled.div`
   margin-top: 18px;
 `;
 
+const LogoutButton = styled(Button)({
+  marginTop: "20px",
+  backgroundColor: "#F36427",
+  "&:hover": {
+    backgroundColor: "#FF8E5E",
+  },
+  color: "white",
+  fontWeight: "bold",
+});
+
 const MyPage = () => {
-  const [cookies] = useCookies(["userId"]);
-  const id = cookies.userId;
+  const [cookies, setCookie, removeCookie] = useCookies(["userId"]);
+  const navigate = useNavigate();
 
   const { data, error, isLoading } = useSWR(
-    id ? `/user/byMe?userId=${id}` : null
+    cookies.userId ? `/user/byMe?userId=${cookies.userId}` : null
   );
-  const [friendshipToggle, setFriendshipToggle] = useState(true);
-  const [loveToggle, setLoveToggle] = useState(true);
+  const [friendshipToggle, setFriendshipToggle] = useState(false);
+  const [loveToggle, setLoveToggle] = useState(false);
+  const [friendAgeRange, setFriendAgeRange] = useState([20, 40]);
+  const [loveAgeRange, setLoveAgeRange] = useState([20, 40]);
+  const [friendGender, setFriendGender] = useState("male");
+  const [loveGender, setLoveGender] = useState("male");
 
-  const [value, setValue] = React.useState([20, 37]);
+  useEffect(() => {
+    if (data) {
+      setFriendshipToggle(true); // 이 예제에서는 토글 상태를 항상 true로 설정합니다. 필요에 따라 조정하세요.
+      setLoveToggle(true); // 이 예제에서는 토글 상태를 항상 true로 설정합니다. 필요에 따라 조정하세요.
+      setFriendAgeRange([data.friend.minAge, data.friend.maxAge]);
+      setLoveAgeRange([data.lover.minAge, data.lover.maxAge]);
+      setFriendGender(data.friend.gender);
+      setLoveGender(data.lover.gender);
+    }
+  }, [data]);
+  const handleLogout = () => {
+    removeCookie("userId", { path: "/" }); // 쿠키 제거
+    navigate("/login"); // 로그인 페이지로 리디렉션
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -177,7 +204,7 @@ const MyPage = () => {
                         <Box sx={{ width: 200, marginLeft: "20px" }}>
                           <Slider
                             getAriaLabel={() => "Temperature range"}
-                            value={value}
+                            value={friendAgeRange}
                             onChange={handleChange}
                             valueLabelDisplay="auto"
                             size="small"
@@ -306,7 +333,7 @@ const MyPage = () => {
                         <Box sx={{ width: 200, marginLeft: "20px" }}>
                           <Slider
                             getAriaLabel={() => "Temperature range"}
-                            value={value}
+                            value={loveAgeRange}
                             onChange={handleChange}
                             valueLabelDisplay="auto"
                             size="small"
@@ -392,19 +419,18 @@ const MyPage = () => {
             <InfoContainer>
               <LabelContainers>
                 <p>아이디</p>
-                <p>비밀번호</p>
                 <Margin>알림</Margin>
                 <p>나이</p>
                 <p>성별</p>
               </LabelContainers>
               <LabelContainer>
                 <p>{data.id}</p>
-                <p>*******</p>
                 <CustomizedSwitches></CustomizedSwitches>
                 <p>{data.age}</p>
                 <p>{data.gender}</p>
               </LabelContainer>
             </InfoContainer>
+            <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
           </Box>
         </Box>
       </Container>
