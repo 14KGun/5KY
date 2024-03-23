@@ -144,6 +144,10 @@ const Img = styled.img`
 
 const Chat = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const {user} = location.state;
+  console.log(user);
+
   return (
     <Container>
       <Header>
@@ -154,10 +158,12 @@ const Chat = () => {
           }}
         ></Icon>
         <Icon src={heart_on}></Icon>
-        제이
+        {user.name}
       </Header>
       <Infos>
-        <Info>#맛집탐방 #여행</Info>이 공통 관심사인 상대입니다.
+        <Info> {user.tags.map((tag)=>{
+          return (`#${tag} `)
+        })}</Info>이(가) 공통 관심사인 상대입니다.
       </Infos>
       <ChatContainer>
         <Reply1>어제 점심 뭐 먹었어?</Reply1>

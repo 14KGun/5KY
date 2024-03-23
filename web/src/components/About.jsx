@@ -171,7 +171,7 @@ const About = ({ setOpenProfile, user }) => {
             type="text"
             onClick={() => {
               setOpenProfile(false);
-              navigate("/chat")}}
+              navigate("/chat", {state: {user: user} });}}
             sx={{
               color: "grey",
               margin: "0rem 8rem 0rem 0rem",
