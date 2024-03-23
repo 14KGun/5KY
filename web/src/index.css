@@ -70,8 +70,8 @@ button:focus-visible {
 .container {
   display: flex; /* Flexbox 레이아웃 사용 */
   flex-direction: column; /* 요소들을 세로로 쌓음 */
-  justify-content: flex-start; /* 컨테이너의 시작점(맨 위)부터 내용을 채움 */
-  align-items: stretch; /* 내부 요소들이 컨테이너의 너비를 꽉 채우도록 함 */
+  justify-content: start; /* 컨테이너의 시작부터 아이템을 쌓음 */
+  align-items: stretch; /* 아이템들이 컨테이너의 시작부분에 정렬됨 */
   padding: 16px; /* 좌우 패딩 제거 */
   width: 100%; /* 너비를 100%로 설정 */
   max-width: 100%; /* 최대 너비를 100%로 설정 */
