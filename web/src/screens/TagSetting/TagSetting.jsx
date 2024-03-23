@@ -1,6 +1,11 @@
 import styled from "styled-components";
 import "./TagSetting.css";
 
+const RealContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 const Container = styled.div`
   width: 100vw-60px;
   height: 100%;
@@ -110,91 +115,93 @@ const NextBtn = styled.div`
 
 const TagSetting = () => {
   return (
-    <Container>
-      <Title>
-        <Name>박정민</Name>님 안녕하세요!
-      </Title>
-      <Info>당신에 대해 알려주세요.</Info>
-      <Info>
-        당신과 비슷한 사람을 <Highlight>우연</Highlight>이 발견해 줄게요:)
-      </Info>
-      <TagContainer>
-        <TagSubContainer>
-          <TagTitle>취미</TagTitle>
-          <Tags>
-            <Tag>#영화</Tag>
-            <SelectedTag>#책</SelectedTag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-          </Tags>
-        </TagSubContainer>
-      </TagContainer>
-      <TagContainer>
-        <TagSubContainer>
-          <TagTitle>취미</TagTitle>
-          <Tags>
-            <Tag>#영화</Tag>
-            <SelectedTag>#책</SelectedTag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-          </Tags>
-        </TagSubContainer>
-      </TagContainer>
-      <TagContainer>
-        <TagSubContainer>
-          <TagTitle>취미</TagTitle>
-          <Tags>
-            <Tag>#영화</Tag>
-            <SelectedTag>#책</SelectedTag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-          </Tags>
-        </TagSubContainer>
-      </TagContainer>
-      <TagContainer>
-        <TagSubContainer>
-          <TagTitle>취미</TagTitle>
-          <Tags>
-            <Tag>#영화</Tag>
-            <SelectedTag>#책</SelectedTag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-          </Tags>
-        </TagSubContainer>
-      </TagContainer>
-      <TagContainer>
-        <TagSubContainer>
-          <TagTitle>취미</TagTitle>
-          <Tags>
-            <Tag>#영화</Tag>
-            <SelectedTag>#책</SelectedTag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <SelectedTag>#영화</SelectedTag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-            <Tag>#영화</Tag>
-          </Tags>
-        </TagSubContainer>
-      </TagContainer>
+    <RealContainer>
+      <Container>
+        <Title>
+          <Name>박정민</Name>님 안녕하세요!
+        </Title>
+        <Info>당신에 대해 알려주세요.</Info>
+        <Info>
+          당신과 비슷한 사람을 <Highlight>우연</Highlight>이 발견해 줄게요:)
+        </Info>
+        <TagContainer>
+          <TagSubContainer>
+            <TagTitle>취미</TagTitle>
+            <Tags>
+              <Tag>#영화</Tag>
+              <SelectedTag>#책</SelectedTag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+            </Tags>
+          </TagSubContainer>
+        </TagContainer>
+        <TagContainer>
+          <TagSubContainer>
+            <TagTitle>취미</TagTitle>
+            <Tags>
+              <Tag>#영화</Tag>
+              <SelectedTag>#책</SelectedTag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+            </Tags>
+          </TagSubContainer>
+        </TagContainer>
+        <TagContainer>
+          <TagSubContainer>
+            <TagTitle>취미</TagTitle>
+            <Tags>
+              <Tag>#영화</Tag>
+              <SelectedTag>#책</SelectedTag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+            </Tags>
+          </TagSubContainer>
+        </TagContainer>
+        <TagContainer>
+          <TagSubContainer>
+            <TagTitle>취미</TagTitle>
+            <Tags>
+              <Tag>#영화</Tag>
+              <SelectedTag>#책</SelectedTag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+            </Tags>
+          </TagSubContainer>
+        </TagContainer>
+        <TagContainer>
+          <TagSubContainer>
+            <TagTitle>취미</TagTitle>
+            <Tags>
+              <Tag>#영화</Tag>
+              <SelectedTag>#책</SelectedTag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <SelectedTag>#영화</SelectedTag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+              <Tag>#영화</Tag>
+            </Tags>
+          </TagSubContainer>
+        </TagContainer>
+      </Container>
       <NextBtn>다음 단계</NextBtn>
-    </Container>
+    </RealContainer>
   );
 };
 
