@@ -34,17 +34,32 @@ const Margin = styled.div`
   margin-top: 18px;
 `;
 
+const LogoutButton = styled(Button)({
+  marginTop: "20px",
+  backgroundColor: "#F36427",
+  "&:hover": {
+    backgroundColor: "#FF8E5E",
+  },
+  color: "white",
+  fontWeight: "bold",
+});
+
 const MyPage = () => {
-  const [cookies] = useCookies(["userId"]);
-  const id = cookies.userId;
+  const [cookies, setCookie, removeCookie] = useCookies(["userId"]);
+  const navigate = useNavigate();
 
   const { data, error, isLoading } = useSWR(
-    id ? `/user/byMe?userId=${id}` : null
+    cookies.userId ? `/user/byMe?userId=${cookies.userId}` : null
   );
+
   const [friendshipToggle, setFriendshipToggle] = useState(true);
   const [loveToggle, setLoveToggle] = useState(true);
 
   const [value, setValue] = React.useState([20, 37]);
+  const handleLogout = () => {
+    removeCookie("userId", { path: "/" }); // 쿠키 제거
+    navigate("/login"); // 로그인 페이지로 리디렉션
+  };
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -403,6 +418,7 @@ const MyPage = () => {
                 <p>{data.gender}</p>
               </LabelContainer>
             </InfoContainer>
+            <LogoutButton onClick={handleLogout}>로그아웃</LogoutButton>
           </Box>
         </Box>
       </Container>
