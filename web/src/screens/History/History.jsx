@@ -63,11 +63,14 @@ const Container = styled.div`
 const SectionTitle = styled.div`
   display: flex;
   align-items: center;
+  justify-content: flex-start; /* Align text to the left */
+  width: 100%; /* Fill the width */
   font-size: 24px;
   font-weight: 600;
   color: #333;
   margin: 20px 0;
 `;
+
 
 const History = () => {
   const [historyData, setHistoryData] = useState(initialHistoryData);
