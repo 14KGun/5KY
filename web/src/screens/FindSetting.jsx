@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
@@ -14,6 +14,10 @@ const Container = styled.div`
   flex-direction: column;
   justify-content: flex-start;
 `;
+const Highlight = styled.span`
+  color: #ff8e5e; // 여기에서 원하는 색깔로 설정하세요
+  font-weight: bold;
+`;
 
 const Greeting = styled.h1`
   color: #000000;
@@ -25,7 +29,7 @@ const Greeting = styled.h1`
 const Nickname = styled.span`
   font-weight: bold;
   font-size: 32px;
-  color: #ff4b5c;
+  color: #f36427;
 `;
 
 const SubText = styled.div`
@@ -50,7 +54,7 @@ const ToggleInput = styled.input`
   width: 0;
   height: 0;
   &:checked + span {
-    background-color: #ff4b5c;
+    background-color: #f36427;
   }
   &:checked + span:before {
     transform: translateX(26px);
@@ -89,7 +93,7 @@ const Input = styled.input`
 `;
 
 const GenderButton = styled.button`
-  background: ${(props) => (props.active ? "#ff4b5c" : "#e7e7e7")};
+  background: ${(props) => (props.active ? "#F36427" : "#e7e7e7")};
   color: white;
   border: none;
   padding: 10px 20px;
@@ -103,12 +107,12 @@ const Title = styled.h2`
   font-size: 1.5em;
   margin-right: 10px;
   display: inline;
-  color: #000000; 
+  color: #000000;
 `;
 
 const ConfirmButton = styled.button`
   width: 100%;
-  background: #ff4b5c;
+  background: #f36427;
   color: white;
   border: none;
   padding: 15px 20px;
@@ -151,8 +155,16 @@ const FindSetting = () => {
     navigate("/");
   };
 
-  const nickname = "닉네임";
+  const [nickname, setNickname] = useState(""); // 닉네임 상태 초기화
+  // 기존 상태 및 핸들러 정의 코드는 생략됨
 
+  useEffect(() => {
+    // Localstorage에서 signupData 가져오기
+    const signupData = JSON.parse(localStorage.getItem("signupData"));
+    if (signupData && signupData.name) {
+      setNickname(signupData.name); // signupData에서 name을 가져와 닉네임 상태 업데이트
+    }
+  }, []);
   return (
     <Container>
       <Greeting>
@@ -161,11 +173,15 @@ const FindSetting = () => {
       <SubText>
         당신이 원하는 만남을 알려주세요.
         <br />
-        당신이 바라는 사람을 우연이 발견해줄게요 :)
+        당신이 바라는 사람을 <Highlight>우연</Highlight>이 발견해줄게요 :)
       </SubText>
-      
+
       <div
-        style={{ display: "flex", alignItems: "flex-between", marginBottom: "1rem" }}
+        style={{
+          display: "flex",
+          alignItems: "flex-between",
+          marginBottom: "1rem",
+        }}
       >
         <Title>친구 찾기</Title>
         <ToggleContainer>
@@ -225,11 +241,14 @@ const FindSetting = () => {
               상관없음
             </GenderButton>
           </div>
-          
         </>
       )}
-<div
-        style={{ display: "flex", alignItems: "flex-between", marginBottom: "1rem" }}
+      <div
+        style={{
+          display: "flex",
+          alignItems: "flex-between",
+          marginBottom: "1rem",
+        }}
       >
         <Title>연인 찾기</Title>
         <ToggleContainer>
@@ -289,7 +308,6 @@ const FindSetting = () => {
               상관없음
             </GenderButton>
           </div>
-          
         </>
       )}
       <ConfirmButton onClick={handleConfirm}>확인</ConfirmButton>

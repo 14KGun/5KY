@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const RealContainer = styled.div`
   display: flex;
@@ -25,7 +27,7 @@ const Title = styled.div`
 const Name = styled.div`
   font-size: 40px;
   font-weight: 700;
-  color: #ec407a;
+  color: #f36427;
 `;
 
 const Info = styled.div`
@@ -34,7 +36,7 @@ const Info = styled.div`
 `;
 
 const Highlight = styled.span`
-  color: #f48fb1;
+  color: #ff8e5e;
   font-size: 14px;
   font-weight: bold;
 `;
@@ -89,7 +91,7 @@ const SelectedTag = styled.div`
   height: 32px;
   border: 0px solid black;
   border-radius: 17px;
-  background-color: #f76da7;
+  background-color: #ff8e5e;
   color: #ffffff;
 `;
 
@@ -100,7 +102,7 @@ const NextBtn = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #ec407a;
+  background-color: #f36427;
   color: white;
   font-size: 16px;
   font-weight: 700;
@@ -113,6 +115,27 @@ const NextBtn = styled.div`
 `;
 
 const TagSetting = () => {
+  const [selectedTags, setSelectedTags] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // Localstorage에서 signupData 가져오기
+    const storedData = localStorage.getItem("signupData");
+    if (storedData) {
+      const parsedData = JSON.parse(storedData);
+      if (parsedData.tags) {
+        setSelectedTags(parsedData.tags); // 기존에 선택된 태그들이 있다면 상태에 설정
+      }
+    }
+  }, []);
+
+  const handleNextClick = () => {
+    const storedData = localStorage.getItem("signupData");
+    let parsedData = storedData ? JSON.parse(storedData) : {};
+    parsedData.tags = selectedTags; // tags 배열을 signupData 객체에 추가
+    localStorage.setItem("signupData", JSON.stringify(parsedData)); // 변경된 데이터를 다시 저장
+    navigate('/findsetting');
+  };
   return (
     <RealContainer>
       <Container>
@@ -199,7 +222,7 @@ const TagSetting = () => {
           </TagSubContainer>
         </TagContainer>
       </Container>
-      <NextBtn>다음 단계</NextBtn>
+      <NextBtn onClick={handleNextClick}>다음 단계</NextBtn>
     </RealContainer>
   );
 };
