@@ -1,13 +1,15 @@
 const { userModel } = require("../modules/models");
 
 module.exports = async (req, res, next) => {
+  const innerUserId = req.cookies.userId || req.body.userId || req.query.userId;
+
   req.user = null;
   req.isLogin = false;
   if (req.session.user) {
     req.user = req.session.user;
     req.isLogin = true;
-  } else if (req.cookies.userId) {
-    const user = await userModel.findById(req.cookies.userId);
+  } else if (innerUserId) {
+    const user = await userModel.findById(innerUserId);
     if (user) {
       req.session.user = {
         _id: user._id,
