@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Typography, Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ProfileContainer = styled.div`
   background: #ffffff;
@@ -70,6 +71,8 @@ const ActionButton = styled.button`
 `;
 
 const About = ({ setOpenProfile, user }) => {
+  const navigate = useNavigate();
+
   return (
     <ProfileContainer>
       <Box
@@ -166,7 +169,9 @@ const About = ({ setOpenProfile, user }) => {
         >
           <Button
             type="text"
-            onClick={() => setOpenProfile(false)}
+            onClick={() => {
+              setOpenProfile(false);
+              navigate("/chat")}}
             sx={{
               color: "grey",
               margin: "0rem 8rem 0rem 0rem",
