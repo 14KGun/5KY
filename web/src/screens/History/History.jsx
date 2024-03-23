@@ -55,7 +55,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 20px;
+  padding: 20px 15px; /* top and bottom padding 20px, left and right padding 15px */
   background: #f7f7f7; /* 배경 색 */
   margin: 0 auto; /* 중앙 정렬 */
 `;
