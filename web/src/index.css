@@ -28,6 +28,7 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  font-family: 'Pretendard Variable', sans-serif;
 }
 
 h1 {
@@ -65,4 +66,9 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+.container {
+  padding: 0 16px; /* 좌우 16px의 패딩을 설정하여 기본 간격을 제공 */
+  max-width: 100%; /* 최대 너비를 100%로 설정하여 화면 너비를 초과하지 않도록 함 */
+  margin: 0 auto; /* 컨테이너를 화면 중앙에 배치 */
 }
