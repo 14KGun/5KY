@@ -1,9 +1,8 @@
 import { useState } from 'react';
 import TabFooter from '../components/TabFooter/TabFooter';
-
-const Tab1 = () => <div>Tab 1 Content</div>;
-const Tab2 = () => <div>Tab 2 Content</div>;
-const Tab3 = () => <div>Tab 3 Content</div>;
+import History from '../screens/History/History';
+import Main from '../screens/Main/Main';
+import MyPage from '../screens/MyPage/MyPage';
 
 const TabApp = () => {
   const [activeTab, setActiveTab] = useState('tab1');
@@ -15,11 +14,11 @@ const TabApp = () => {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'tab1':
-        return <Tab1 />;
+        return <History />;
       case 'tab2':
-        return <Tab2 />;
+        return <Main />;
       case 'tab3':
-        return <Tab3 />;
+        return <MyPage />;
       default:
         return <div>Unknown Tab</div>;
     }
@@ -27,11 +26,6 @@ const TabApp = () => {
 
   return (
     <div>
-      <ul className="tab-list">
-        <li className={activeTab === 'tab1' ? 'active' : ''} onClick={() => handleTabClick('tab1')}>Tab 1</li>
-        <li className={activeTab === 'tab2' ? 'active' : ''} onClick={() => handleTabClick('tab2')}>Tab 2</li>
-        <li className={activeTab === 'tab3' ? 'active' : ''} onClick={() => handleTabClick('tab3')}>Tab 3</li>
-      </ul>
       <div className="tab-content">
         {renderTabContent()}
       </div>
