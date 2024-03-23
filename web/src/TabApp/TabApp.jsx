@@ -5,10 +5,13 @@ import TabFooter from '../components/TabFooter/TabFooter';
 import History from '../screens/History';
 import Main from '../screens/Main/Main';
 import MyPage from '../screens/MyPage/MyPage';
+import useSWR from 'swr';
 
 const TabApp = () => {
+  const { data, error, isLoading } = useSWR("/user/byMe");
   const [activeTab, setActiveTab] = useState('tab2');
 
+  console.log(data);
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -28,6 +31,9 @@ const TabApp = () => {
 
   return (
     <div>
+      {data}
+      {JSON.stringify(error)}
+      {isLoading}
       <div className="tab-content">
         {renderTabContent()}
       </div>
