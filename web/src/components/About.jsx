@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Typography, Box, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ProfileContainer = styled.div`
   background: #ffffff;
@@ -69,7 +70,9 @@ const ActionButton = styled.button`
   }
 `;
 
-const About = ({ setOpenProfile, nickname }) => {
+const About = ({ setOpenProfile, user }) => {
+  const navigate = useNavigate();
+
   return (
     <ProfileContainer>
       <Box
@@ -111,14 +114,14 @@ const About = ({ setOpenProfile, nickname }) => {
                 fontSize={"24px"}
                 color="primary"
               >
-                {nickname}
+                {user.name}
               </Typography>
               <Typography>
                 님이
                 <br />
               </Typography>
             </Box>
-            <Typography>12분 전에 우연을 울렸어요!</Typography>
+            <Typography>당신의 우연을 울렸어요!</Typography>
           </Box>
         </Header>
         <Box
@@ -131,30 +134,30 @@ const About = ({ setOpenProfile, nickname }) => {
             <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
               성별
             </Typography>
-            <Typography>여성</Typography>
+            <Typography>{user.gender}</Typography>
           </Box>
           <Box>
             <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
               나이
             </Typography>
-            <Typography>23세</Typography>
+            <Typography>{user.age}</Typography>
           </Box>
         </Box>
-        <Box>
+        {/* <Box>
           <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
             공통 관심사
           </Typography>
           <Typography fontFamily={"Pretendard-Reular"}>
             #맛집탐방 #음악
           </Typography>
-        </Box>
+        </Box> */}
 
         <Box>
           <Typography fontFamily={"Pretendard-Thin"} fontSize={"12px"}>
             관심사
           </Typography>
           <Typography fontFamily={"Pretendard-Reular"}>
-            #맛집탐방 #음악 #유튜브 보기
+            {user.tags.map((tag) => `#${tag} `)}
           </Typography>
         </Box>
         <Box
@@ -166,7 +169,9 @@ const About = ({ setOpenProfile, nickname }) => {
         >
           <Button
             type="text"
-            onClick={() => setOpenProfile(false)}
+            onClick={() => {
+              setOpenProfile(false);
+              navigate("/chat", {state: {user: user} });}}
             sx={{
               color: "grey",
               margin: "0rem 8rem 0rem 0rem",

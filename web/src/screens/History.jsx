@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import HistoryCard from "../components/HistoryCard";
 import styled from "styled-components";
 import About from "../components/About";
-import { Box, Modal } from "@mui/material";
+import { Box, Modal, Typography } from "@mui/material";
 import PrimaryButton from "../components/PrimaryButton";
 import useSWR from "swr";
 import instance from "../utils/instance";
@@ -82,6 +82,7 @@ const History = () => {
   const [historyData, setHistoryData] = useState(initialHistoryData);
   const [openProfile, setOpenProfile] = useState(false);
   const [selectedNickname, setSelectedNickname] = useState("");
+  const [selectedUser , setSelectedUser] = useState({});
 
   const [cookies] = useCookies(["userId"]);
   const id = cookies.userId;
@@ -98,53 +99,53 @@ const History = () => {
   // }, [id, pw]);
   const { data, error, isLoading } = useSWR(`/history/byMe?userId=${id}`);
   useEffect(() => {
-    console.log(data? data[0].users:null);
-    setHistoryData(data? data[0].users : []);
+    console.log(data? data[0]?.users:null);
+    setHistoryData(data? data[0]?.users : []);
   }, [data]);
   //console.log("zzz", data);
   // 북마크된 항목만 필터링합니다.
-  const bookmarks = historyData.filter((item) => item.isHeartFilled);
+  const bookmarks = historyData?.filter((item) => item.isHeartFilled);
   const today = new Date().toISOString().split("T")[0];
-  const todaysCoincidences = historyData.filter((item) => item.date === today);
+  const todaysCoincidences = historyData?.filter((item) => item.date === today);
 
   // toggleHeart 함수는 id를 받아 해당하는 항목의 isHeartFilled 상태를 토글합니다.
   const toggleHeart = (id) => {
-    const updatedHistory = historyData.map((item) =>
+    const updatedHistory = historyData?.map((item) =>
       item.id === id ? { ...item, isHeartFilled: !item.isHeartFilled } : item
     );
     setHistoryData(updatedHistory);
   };
 
-  const cardClick = (nickname) => {
+  const cardClick = (user) => {
     setOpenProfile(true);
-    setSelectedNickname(nickname);
+    setSelectedUser(user);
   };
 
-  const allCoincidences = historyData.filter((item) => !item.isHeartFilled);
+  const allCoincidences = historyData?.filter((item) => !item.isHeartFilled);
 
   return (
     <>
       <Modal open={openProfile} onClose={() => setOpenProfile(false)}>
         <Box>
-          <About setOpenProfile={setOpenProfile} nickname={selectedNickname} />
+          <About setOpenProfile={setOpenProfile} user={selectedUser} />
         </Box>
       </Modal>
       <Container>
-        {bookmarks.map((data) => (
+        {bookmarks?.map((data) => (
           <HistoryCard
             key={data.id}
             id = {data.id}
             nickname={data.name}
             metCount={1}
             isHeartFilled={true}
+            user={data}
             onHeartClick={toggleHeart}
             onCardClick={cardClick}
           />
         ))}
 
         <SectionTitle>오늘의 우연</SectionTitle>
-        {todaysCoincidences.map((data) => {
-          console.log("??",data);
+        {todaysCoincidences?.map((data) => {
           return (
           <HistoryCard
             key={data.id}
@@ -155,7 +156,7 @@ const History = () => {
         )})}
         
         <SectionTitle>그 모든 우연</SectionTitle>
-        {allCoincidences.map((data) => {
+        {allCoincidences? (allCoincidences.map((data) => {
           console.log("??",data);
           return(
           <HistoryCard
@@ -164,10 +165,17 @@ const History = () => {
             nickname={data.name}
             metCount={1}
             isHeartFilled={false}
+            user = {data}
             onHeartClick={toggleHeart}
             onCardClick={cardClick}
           />
-        )})}
+        )})): <Typography color={"grey"}
+        fontFamily={"Pretendard-Thin"}
+        sx={{
+          display: "flex",
+          alignItems: "start",
+          justifyContent: "start",
+        }}> 우연을 울린 유저가 없습니다.</Typography>}
       </Container>
     </>
   );

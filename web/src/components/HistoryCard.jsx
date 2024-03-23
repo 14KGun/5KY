@@ -53,12 +53,13 @@ const HistoryCard = ({
   nickname,
   metCount,
   isHeartFilled,
+  user,
   onHeartClick,
   onCardClick,
 }) => {
   return (
     // const image = () => { isHeartFilled ? {heart_on} : {heart_off}};
-    <Card onClick={()=>onCardClick(nickname)}>
+    <Card onClick={()=>onCardClick(user)}>
       <HeartIcon
         onClick={(event) => {
           event.stopPropagation(); // 이벤트 버블링 중단
