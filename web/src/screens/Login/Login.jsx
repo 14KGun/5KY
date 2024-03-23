@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 import { useCallback, useState } from "react";
 import instance from "../../utils/instance";
+import { useCookies } from 'react-cookie';
 
 const Container = styled.div`
   width: 100vw;
@@ -84,12 +85,15 @@ const SignupBtn = styled.div`
 
 const Login = () => {
   const navigate = useNavigate();
+  const [cookies, setCookie] = useCookies(['userId']);
   const [id, setId] = useState();
   const [pw, setPw] = useState();
 
   const onClickLogin = useCallback(async () => {
     try {
       const { data } = await instance.post("/auth", { id, password: pw });
+      console.log(data);
+      setCookie('userId', data);
       navigate("/");
     } catch (error) {
       console.log(error);
