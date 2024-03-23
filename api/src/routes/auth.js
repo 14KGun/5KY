@@ -1,4 +1,6 @@
 const express = require("express");
+const wrapAsyncController = require("../modules/wrapAsyncController");
+const userModel = require("../modules/models/user.model");
 const router = express.Router();
 
 /**
@@ -7,29 +9,48 @@ const router = express.Router();
  *    post:
  *      summary: 로그인
  *      tags: [auth]
- *      produces:
- *      - text/plain
- *      parameters:
- *        - in: body
- *          name: category
- *          required: false
- *          schema:
- *            type: object
- *            required:
- *              - category
- *            properties:
- *              userName:
- *                type: string
- *              firstName:
- *                type: string
+ *      requestBody:
+ *        required: true
+ *        content:
+ *          application/json:
+ *            schema:
+ *              type: object
+ *              required: [id, password]
+ *              properties:
+ *                id:
+ *                  type: string
+ *                password:
+ *                  type: string
  *      responses:
- *       200:
- *        description: 로그인 성공
+ *        200:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                description: 유저 아이디
+ *                example: "유저 아이디"
  */
-router.post("/", (req, res) => {
-  console.log("POST /");
-  res.send("POST /");
-});
+router.post(
+  "/",
+  wrapAsyncController(async (req, res) => {
+    const user = await userModel.findOne({
+      id: req.body.id,
+      password: req.body.password,
+    });
+    if (!user) {
+      res.status(404).send("Not Found");
+      return;
+    }
+    req.session.user = {
+      id: user.id,
+      name: user.name,
+      age: user.age,
+      gender: user.gender,
+    };
+    await req.session.save();
+    res.send(user._id);
+  })
+);
 
 /**
  * @swagger
@@ -37,14 +58,21 @@ router.post("/", (req, res) => {
  *    delete:
  *      summary: 로그아웃
  *      tags: [auth]
- *      produces:
- *      - text/plain
  *      responses:
- *       200:
- *        description: 로그아웃 성공
+ *        200:
+ *          content:
+ *            application/json:
+ *              schema:
+ *                type: string
+ *                description: Success
+ *                example: "Success"
  */
-router.delete("/", (req, res) => {
-  res.send("Success");
-});
+router.delete(
+  "/",
+  wrapAsyncController(async (req, res) => {
+    await req.session.destroy();
+    res.send("Success");
+  })
+);
 
 module.exports = router;

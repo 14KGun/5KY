@@ -3,13 +3,12 @@ const Schema = mongoose.Schema;
 
 const userSchema = Schema(
   {
+    id: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
     name: { type: String, required: true },
     tags: { type: [String], required: true, default: [] },
     age: { type: Number, required: true },
-    id: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    locationLatitude: { type: Number, required: false },
-    locationLongitude: { type: Number, required: false },
+    gender: { type: String, required: true, enum: ["male", "female"] },
   },
   { timestamps: true }
 );

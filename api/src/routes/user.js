@@ -46,6 +46,9 @@ router.get(
  *                    type: string
  *                age:
  *                  type: number
+ *                gender:
+ *                  type: string
+ *                  enum: [male, female]
  *                id:
  *                  type: string
  *                password:
@@ -57,6 +60,7 @@ router.get(
  *              schema:
  *                type: string
  *                description: 유저 아이디
+ *                example: "유저 아이디"
  */
 router.post(
   "/",
@@ -65,6 +69,7 @@ router.post(
       name: req.body.name,
       tags: req.body.tags,
       age: req.body.age,
+      gender: req.body.gender,
       id: req.body.id,
       password: req.body.password,
     });
@@ -74,8 +79,8 @@ router.post(
 
 /**
  * @swagger
- *  /user/byMe:
- *    patch:
+ *  /user/location/byMe:
+ *    put:
  *      summary: 내 유저 정보 업데이트 (위치 정보 수정 등)
  *      tags: [user]
  *      produces:
@@ -86,10 +91,11 @@ router.post(
  *          application/json:
  *            schema:
  *              type: object
+ *              required: [latitude, longitude]
  *              properties:
- *                locationLatitude:
+ *                latitude:
  *                  type: number
- *                locationLongitude:
+ *                longitude:
  *                  type: number
  *      responses:
  *        200:
@@ -98,9 +104,10 @@ router.post(
  *              schema:
  *                type: string
  *                description: 유저 아이디
+ *                example: "유저 아이디"
  */
-router.patch(
-  "/byMe",
+router.put(
+  "/location/byMe",
   wrapAsyncController(async (req, res) => {
     res.send("Success");
   })
