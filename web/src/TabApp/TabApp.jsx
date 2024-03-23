@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import styled from 'styled-components';
+
 import TabFooter from '../components/TabFooter/TabFooter';
 import History from '../screens/History/History';
 import Main from '../screens/Main/Main';

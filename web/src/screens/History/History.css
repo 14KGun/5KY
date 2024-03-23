@@ -3,12 +3,13 @@
     flex-direction: column;
     padding: 20px;
     background: #f7f7f7; /* 배경 색 */
-    max-width: 400px; /* 최대 너비 설정 */
     margin: 0 auto; /* 중앙 정렬 */
   }
   
   .section-title {
-    font-size: 20px;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
     font-weight: 600;
     color: #333;
     margin: 20px 0; /* 제목 간격 */
