@@ -114,11 +114,39 @@ const NextBtn = styled.div`
   }
 `;
 
+const initialTags = [
+  {
+    category: "취미",
+    tags: ["영화", "책", "음악", "여행", "요리"],
+  },
+  {
+    category: "성격",
+    tags: ["내향적", "외향적", "창의적", "논리적", "감성적"],
+  },
+  // 추가 분류 및 태그들...
+];
+
 const TagSetting = () => {
   const [selectedTags, setSelectedTags] = useState([]);
   const navigate = useNavigate();
   const [nickname, setNickname] = useState(""); // 닉네임 상태 초기화
   // 기존 상태 및 핸들러 정의 코드는 생략됨
+
+  // 태그 선택/해제 핸들러
+  const toggleTag = (tag) => {
+    setSelectedTags((prev) => {
+      if (prev.includes(tag)) {
+        return prev.filter((t) => t !== tag);
+      } else {
+        return [...prev, tag];
+      }
+    });
+  };
+
+  // 태그가 선택되었는지 여부를 결정하는 함수
+  const isTagSelected = (tag) => {
+    return selectedTags.includes(tag);
+  };
 
   useEffect(() => {
     // Localstorage에서 signupData 가져오기
@@ -142,7 +170,11 @@ const TagSetting = () => {
   const handleNextClick = () => {
     const storedData = localStorage.getItem("signupData");
     let parsedData = storedData ? JSON.parse(storedData) : {};
-    parsedData.tags = selectedTags; // tags 배열을 signupData 객체에 추가
+
+    // 선택된 태그들을 signupData 객체에 추가
+    parsedData.tags = selectedTags;
+    
+    // 변경된 데이터를 localStorage에 저장    
     localStorage.setItem("signupData", JSON.stringify(parsedData)); // 변경된 데이터를 다시 저장
     navigate('/findsetting');
   };
@@ -156,81 +188,24 @@ const TagSetting = () => {
         <Info>
           당신과 비슷한 사람을 <Highlight>우연</Highlight>이 발견해 줄게요:)
         </Info>
-        <TagContainer>
-          <TagSubContainer>
-            <TagTitle>취미</TagTitle>
-            <Tags>
-              <Tag>#영화</Tag>
-              <SelectedTag>#책</SelectedTag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-            </Tags>
-          </TagSubContainer>
-        </TagContainer>
-        <TagContainer>
-          <TagSubContainer>
-            <TagTitle>취미</TagTitle>
-            <Tags>
-              <Tag>#영화</Tag>
-              <SelectedTag>#책</SelectedTag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-            </Tags>
-          </TagSubContainer>
-        </TagContainer>
-        <TagContainer>
-          <TagSubContainer>
-            <TagTitle>취미</TagTitle>
-            <Tags>
-              <Tag>#영화</Tag>
-              <SelectedTag>#책</SelectedTag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-            </Tags>
-          </TagSubContainer>
-        </TagContainer>
-        <TagContainer>
-          <TagSubContainer>
-            <TagTitle>취미</TagTitle>
-            <Tags>
-              <Tag>#영화</Tag>
-              <SelectedTag>#책</SelectedTag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-            </Tags>
-          </TagSubContainer>
-        </TagContainer>
-        <TagContainer>
-          <TagSubContainer>
-            <TagTitle>취미</TagTitle>
-            <Tags>
-              <Tag>#영화</Tag>
-              <SelectedTag>#책</SelectedTag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <SelectedTag>#영화</SelectedTag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-              <Tag>#영화</Tag>
-            </Tags>
-          </TagSubContainer>
-        </TagContainer>
+        {initialTags.map((category) => (
+          <TagContainer key={category.category}>
+            <TagSubContainer>
+              <TagTitle>{category.category}</TagTitle>
+              <Tags>
+                {category.tags.map((tag) => (
+                  <div key={tag} onClick={() => toggleTag(tag)}>
+                    {isTagSelected(tag) ? (
+                      <SelectedTag>{'#' + tag}</SelectedTag>
+                    ) : (
+                      <Tag>{'#' + tag}</Tag>
+                    )}
+                  </div>
+                ))}
+              </Tags>
+            </TagSubContainer>
+          </TagContainer>
+        ))}
       </Container>
       <NextBtn onClick={handleNextClick}>다음 단계</NextBtn>
     </RealContainer>
