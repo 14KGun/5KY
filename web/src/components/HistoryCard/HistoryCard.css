@@ -1,0 +1,36 @@
+.history-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: white;
+    border-radius: 25px;
+    box-shadow: 0px 3px 6px #00000029;
+    margin: 10px;
+    font-family: 'Pretendard Variable', sans-serif;
+  }
+  
+  .heart-icon {
+    font-size: 24px; /* 크기는 조절 가능 */
+    cursor: pointer;
+  }
+  
+  .nickname {
+    flex-grow: 1;
+    margin-left: 10px; /* 하트 아이콘과의 간격 */
+    font-size: 18px; /* 크기는 조절 가능 */
+    color: #333;
+  }
+  
+  .met-count {
+    font-size: 16px; /* 크기는 조절 가능 */
+    color: #666;
+    display: flex;
+    align-items: center;
+  }
+  
+  .mail-icon {
+    font-size: 20px; /* 크기는 조절 가능 */
+    margin-left: 5px;
+  }
+  
