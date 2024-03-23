@@ -11,7 +11,7 @@ database.on("disconnected", () => {
 });
 
 module.exports.connectDatabase = () => {
-  mongoose.connect("mongodb://localhost:27017/skyst", {
+  mongoose.connect("mongodb://ec2-13-124-193-99.ap-northeast-2.compute.amazonaws.com:27018/skyst", {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   });
