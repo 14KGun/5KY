@@ -1,14 +1,50 @@
-import React, { useState } from 'react';
-import HistoryCard from '../../components/HistoryCard/HistoryCard';
+import React, { useState } from "react";
+import HistoryCard from "../../components/HistoryCard/HistoryCard";
 
 // 각 항목에 고유한 id 속성을 추가합니다.
 const initialHistoryData = [
-  { id: 1, nickname: "제이", metCount: 51, isHeartFilled: true },
-  { id: 2, nickname: "프로스트", metCount: 3, isHeartFilled: false },
-  { id: 3, nickname: "라이트", metCount: 1, isHeartFilled: false },
-  { id: 4, nickname: "얼그레이", metCount: 23, isHeartFilled: true },
-  { id: 5, nickname: "수니", metCount: 10, isHeartFilled: false },
-  { id: 6, nickname: "블루디", metCount: 7, isHeartFilled: true },
+  {
+    id: 1,
+    nickname: "제이",
+    metCount: 51,
+    isHeartFilled: true,
+    date: "2024-03-23",
+  },
+  {
+    id: 2,
+    nickname: "프로스트",
+    metCount: 3,
+    isHeartFilled: false,
+    date: "2024-03-23",
+  },
+  {
+    id: 3,
+    nickname: "라이트",
+    metCount: 1,
+    isHeartFilled: false,
+    date: "2024-03-22",
+  },
+  {
+    id: 4,
+    nickname: "얼그레이",
+    metCount: 23,
+    isHeartFilled: true,
+    date: "2024-03-23",
+  },
+  {
+    id: 5,
+    nickname: "수니",
+    metCount: 10,
+    isHeartFilled: false,
+    date: "2024-03-22",
+  },
+  {
+    id: 6,
+    nickname: "블루디",
+    metCount: 7,
+    isHeartFilled: true,
+    date: "2024-03-22",
+  },
 ];
 
 const History = () => {
@@ -16,7 +52,10 @@ const History = () => {
 
   // 북마크된 항목만 필터링합니다.
   const bookmarks = historyData.filter((item) => item.isHeartFilled);
-  
+  const today = new Date().toISOString().split("T")[0];
+  const todaysCoincidences = historyData.filter(
+    (item) => item.date === today
+  );
   // toggleHeart 함수는 id를 받아 해당하는 항목의 isHeartFilled 상태를 토글합니다.
   const toggleHeart = (id) => {
     const updatedHistory = historyData.map((item) =>
@@ -35,7 +74,7 @@ const History = () => {
 
         {/* '오늘의 우연' 섹션 */}
         <div className="section-title">오늘의 우연</div>
-        {bookmarks.map((data) => (
+        {todaysCoincidences.map((data) => (
           <HistoryCard key={data.id} {...data} onHeartClick={toggleHeart} />
         ))}
 
