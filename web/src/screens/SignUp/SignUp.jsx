@@ -157,8 +157,8 @@ const SignUp = () => {
           onChange={handleChange}
           displayEmpty
         >
-          <MenuItem value={"남성"}>남성</MenuItem>
-          <MenuItem value={"여성"}>여성</MenuItem>
+          <MenuItem value={"male"}>남성</MenuItem>
+          <MenuItem value={"female"}>여성</MenuItem>
           <MenuItem value={"밝히고 싶지 않음"}>밝히고 싶지 않음</MenuItem>
         </Select>
         <Label>아이디</Label>
